@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#181a1b"><title>Sensitivity Finder · 独立校准实验室</title><style>:root{color-scheme:dark;--bg:#10141c;--panel:#171e29;--line:#2a3341;--muted:#8c9aad;--text:#eef3f7;--cyan:#69dbe7;--violet:#c2b9ff;--green:#91edba;--red:#ff979e;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif;font-synthesis:none}
+*{box-sizing:border-box}body{margin:0;color:var(--text);background:radial-gradient(ellipse at 80% -15%,#23354590,transparent 45%),var(--bg);font-size:14px;line-height:1.6}button,input,select{font:inherit}button,a,input,select,summary{-webkit-tap-highlight-color:transparent}button{cursor:pointer}button,a{transition:color .18s,background .18s,border-color .18s,transform .18s}button:disabled{cursor:not-allowed;opacity:.5}a{color:inherit}button:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid var(--cyan);outline-offset:4px}.hidden{display:none!important}
+.app{max-width:1760px;margin:auto}header{height:90px;margin:0 42px;border-bottom:1px solid #ffffff12;display:flex;align-items:center;justify-content:space-between}.wordmark{display:flex;align-items:center;gap:12px;text-decoration:none;line-height:1.15;font-weight:850;font-size:16px;letter-spacing:.14em}.logo{display:grid;place-items:center;width:39px;height:39px;font-size:37px;font-weight:350;color:var(--cyan)}.wordmark-sub{display:block;color:var(--muted);font-size:8px;letter-spacing:.25em;margin-top:7px;font-weight:600}.header-right{display:flex;align-items:center;gap:23px}.local{display:flex;gap:8px;align-items:center;color:#a5b2bf;font-size:11px}.local i{width:5px;height:5px;background:var(--green);border-radius:50%}.layout{display:grid;grid-template-columns:218px 1fr;min-height:calc(100svh - 90px)}aside{border-right:1px solid #ffffff0f;padding:41px 18px 25px 35px;display:flex;flex-direction:column}.nav-label{color:#65758b;font-size:8px;letter-spacing:.14em;margin:0 0 23px 11px}.nav{border:1px solid transparent;background:transparent;display:flex;gap:10px;width:100%;padding:12px 11px;color:#8796a9;font-size:12px;border-radius:8px;text-align:left;margin-bottom:8px}.nav>span{font-size:17px;line-height:19px}.nav small{margin-left:auto;align-self:center;color:#60738a;font-size:9px}.nav.active{color:var(--cyan);background:#69dbe70c;border-color:#69dbe71c}.nav:hover{background:#ffffff07}.aside-bottom{margin-top:auto;padding:90px 12px 10px}.mini-cross{font-size:34px;color:#485b6f;font-weight:250;line-height:1;margin-bottom:17px}.aside-bottom strong{font-weight:550;font-size:12px;color:#b1bdcb}.aside-bottom p{color:#64748a;font-size:10px;margin:6px 0 25px}.offline{font-size:8px;letter-spacing:.08em;color:#516a6d}
+main{min-width:0;padding:40px 44px 0;max-width:1370px;width:100%;margin:auto}section{scroll-margin-top:20px}.eyebrow{display:flex;align-items:center;gap:12px;color:var(--cyan);font-size:9px;letter-spacing:.2em;font-weight:750}.eyebrow>span{border-left:1px solid #43505f;padding-left:12px;font-weight:500;letter-spacing:.07em;color:#718298}.hero-title{display:flex;justify-content:space-between;align-items:flex-end;gap:25px;margin:14px 0 30px}.hero-title h1{margin:0;font-size:clamp(31px,3vw,45px);font-weight:780;letter-spacing:-.05em;line-height:1.2}.hero-title h1 span{color:var(--cyan);display:block}.hero-title p{color:var(--muted);font-size:11px;line-height:1.9;margin:0 0 2px}.workspace{display:grid;grid-template-columns:310px minmax(0,1fr);gap:23px;align-items:start}.panel{border:1px solid var(--line);background:linear-gradient(135deg,#1b2430aa,#151c26);border-radius:12px}.settings{padding:23px}.panel-heading{display:flex;align-items:center;gap:10px;margin-bottom:20px}.panel-heading>span{font-size:10px;font-weight:750;color:var(--cyan)}.panel-heading h2{margin:0;font-size:13px;letter-spacing:.03em;font-weight:700}.panel-heading small{margin-left:auto;color:var(--muted);font-size:10px}label{display:block;font-size:10px;color:#a7b5c5;font-weight:550;margin:18px 0 7px}input[type=number],select{border:1px solid #34404f;width:100%;height:42px;background:#101720;color:#e6eef4;border-radius:6px;outline:none;padding:0 11px;font-size:12px}input[type=number]:focus,select:focus{border-color:#69dbe78a;box-shadow:0 0 0 3px #69dbe70c}.field-pair{display:grid;grid-template-columns:1fr 1fr;gap:10px}.baseline{margin-top:15px;display:flex;align-items:center;justify-content:space-between;gap:8px;border-radius:7px;background:#69dbe708;padding:11px 10px;border:1px solid #69dbe718}.baseline>span{font-size:9px;color:#809aac}.baseline strong{font-size:16px;color:var(--cyan);font-weight:650;font-variant-numeric:tabular-nums}.baseline small{font-size:8px;color:#93a5b5;font-weight:450}.tiny{color:#75869a;font-size:9px;line-height:1.7;margin-top:7px}.advanced{margin-top:15px}.advanced summary{font-size:10px;cursor:pointer;color:#889cb0}.advanced label{margin-top:12px}.checkline{display:flex;justify-content:space-between;gap:8px}.checkline label{display:flex;align-items:center;gap:5px;font-size:10px}.checkline input{accent-color:var(--cyan)}.error{color:var(--red);font-size:10px;line-height:1.5;margin-top:12px}.error:empty{display:none}.primary{display:flex;align-items:center;justify-content:center;gap:12px;background:var(--cyan);color:#0e242b;border:1px solid var(--cyan);border-radius:6px;min-height:43px;padding:10px 17px;font-size:12px;font-weight:800;box-shadow:0 6px 23px #69dbe70e}.settings .primary{width:100%;margin-top:21px}.primary>span{font-size:18px;margin-left:auto}.primary:hover{background:#8ee7ef;border-color:#8ee7ef;transform:translateY(-1px)}.primary:active{transform:none}.text-btn{display:block;border:0;background:transparent;color:#8ea7b7;font-size:10px;padding:11px 0 0;margin:auto}.text-btn:hover{color:var(--cyan)}.settings-note{color:#53677a;font-size:8px;text-align:center;margin-top:16px}.subtle{border:0;background:transparent;color:#8296aa;padding:6px 0;font-size:10px}.subtle:hover{color:#dceaf4}.secondary{border:1px solid #3a4655;color:#b1c1d0;background:#1c2734;border-radius:6px;min-height:38px;padding:8px 14px;font-size:11px}.secondary:hover{background:#293747;border-color:#5b6f84}
+.scene-preview{height:272px;background:#172232;position:relative;border-radius:12px;border:1px solid #344150;overflow:hidden}.scene-preview canvas{display:block;width:100%;height:100%}.preview-top{position:absolute;top:17px;left:18px;right:18px;display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:8px;color:#afbdc9;letter-spacing:.1em}.preview-top i{font-style:normal;color:#7994a7;font-size:8px;letter-spacing:0}.preview-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#edf9ff;font-size:22px;font-weight:250}.preview-bottom{position:absolute;bottom:0;left:0;right:0;display:flex;gap:26px;justify-content:center;background:linear-gradient(0deg,#101720ee,#10172000);padding:38px 15px 17px;font-size:9px;color:#9aacbc}.preview-bottom b{color:#dce7ef;font-size:15px;margin-right:4px;font-variant-numeric:tabular-nums}.task-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:14px}.task-card{border:1px solid #293645;border-radius:9px;padding:15px 14px;background:linear-gradient(145deg,#1b273420,#1b273440);display:flex;gap:12px;align-items:flex-start}.task-icon{display:grid;place-items:center;color:var(--cyan);border:1px solid #69dbe72a;border-radius:7px;background:#69dbe709;width:33px;height:33px;flex:none;font-size:19px;line-height:1}.task-card:nth-child(even) .task-icon{color:var(--violet);border-color:#c2b9ff2a;background:#c2b9ff09}.task-card h3{font-size:11px;margin:0 0 3px}.task-card .en{font-size:7px;letter-spacing:.1em;color:#71899e}.task-card p{color:#8193a7;font-size:9px;line-height:1.75;margin:6px 0 0}.method-strip{margin-top:18px;padding:12px 10px;display:flex;justify-content:space-between;color:#9aafbf;font-size:9px;border-top:1px solid #ffffff0d;border-bottom:1px solid #ffffff0d}.method-strip b{color:#455f71;font-weight:400}.method-note{font-size:9px;color:#576f83;margin:12px 0 0;line-height:1.7}footer{display:flex;justify-content:space-between;gap:20px;font-size:9px;color:#4f6275;border-top:1px solid #ffffff0c;padding:20px 0;margin-top:36px}
+.report-title{font-size:29px;font-weight:700;letter-spacing:-.04em;line-height:1.3;margin:17px 0 25px}.report-top{display:grid;grid-template-columns:1.2fr 1fr;gap:18px}.recommend{padding:25px;border-color:#69dbe73c;background:linear-gradient(130deg,#69dbe710,#151d29)}.kicker{font-size:10px;color:#95b6c4}.recommended-value{display:flex;align-items:baseline;gap:10px;margin:12px 0 4px}.recommended-value>span{font-size:49px;font-weight:700;color:var(--cyan);line-height:1.15;letter-spacing:-.05em}.recommended-value small{font-size:12px;color:#8ca6b6}.recommend-game{color:#c9d6e1;font-size:12px}.recommend p{font-size:10px;color:#8b9fb1;line-height:1.8;margin-bottom:0}.comparison{font-size:10px;color:var(--green);margin-top:12px}.metrics-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.metric{padding:19px 16px;border:1px solid var(--line);border-radius:10px;background:#171f2b}.metric span{font-size:9px;color:#8399ad;display:block}.metric strong{display:block;font-size:25px;font-weight:650;margin:8px 0 4px;line-height:1}.metric small{font-size:8px;color:#617e96}.game-results,.data-panel{margin-top:18px;padding:20px}.game-result-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.game-result{padding:14px;border:1px solid #344150;border-radius:8px;background:#121b26}.game-result span{display:block;font-size:10px;color:#93a9b9}.game-result b{display:block;font-size:23px;color:#e6f3fc;margin:6px 0 8px;font-weight:650}.game-result small{font-size:8px;color:#6f8496}.copy-value{font-size:9px;padding:4px 9px;border:1px solid #344c5e;border-radius:4px;background:#223243;color:#a9c3d5;float:right}.table-scroll{overflow:auto}table{width:100%;min-width:580px;border-collapse:collapse;font-size:10px}th,td{text-align:left;padding:11px 9px;border-bottom:1px solid #ffffff0a;font-variant-numeric:tabular-nums}th{font-size:9px;color:#677f95;font-weight:550}td{color:#b0c2d1}tr.winner td{color:var(--cyan);background:#69dbe705}.chart{display:flex;align-items:flex-end;gap:12px;min-height:120px;padding:15px 10px 12px}.chart-col{flex:1;min-width:30px;text-align:center;font-size:8px;color:#6f899d}.chart-col>div{width:min(65px,100%);margin:auto;background:#2e4b62;border-radius:4px 4px 0 0;position:relative;min-height:3px}.chart-col.best>div{background:linear-gradient(0deg,#3c8795,#69dbe7)}.chart-col b{display:block;font-size:8px;color:#a9c4d8;position:relative;top:-19px}.chart-col small{display:block;margin-top:5px;font-size:8px}.result-actions{display:flex;gap:12px;align-items:center;margin-top:22px;flex-wrap:wrap}.history-list{padding:10px 22px;margin-bottom:18px}.history-empty{padding:36px 15px;text-align:center;color:var(--muted);font-size:12px}.history-row{display:flex;align-items:center;gap:20px;padding:17px 0;border-bottom:1px solid #ffffff0b}.history-row:last-child{border:0}.history-row strong{font-size:16px;color:var(--cyan)}.history-row p{margin:3px 0 0;color:#697f94;font-size:10px}.history-row>span{margin-left:auto;color:#899fae;font-size:10px}
+.arena{position:fixed;inset:0;z-index:50;background:#111927}.arena canvas{display:block;width:100%;height:100%;touch-action:none}.hud{position:absolute;top:0;left:0;right:0;padding:23px 30px;display:grid;grid-template-columns:1fr 180px 1fr;gap:16px;pointer-events:none;background:linear-gradient(#101720dc,transparent)}.phase{font-size:10px;letter-spacing:.14em;color:var(--cyan);margin-bottom:6px}.hud h2{font-size:21px;margin:0;font-weight:700;letter-spacing:-.02em}.hud p{font-size:11px;color:#9caec0;margin:4px 0 0}.hud-center{text-align:center}.remaining{font-size:30px;line-height:1.4;font-variant-numeric:tabular-nums;letter-spacing:.025em;font-weight:500}.run-progress{margin:8px auto 0;width:130px;background:#ffffff16;height:2px}.run-progress i{display:block;width:0;height:100%;background:var(--cyan)}.hud-right{text-align:right}.hud-right strong{display:block;font-variant-numeric:tabular-nums;font-size:25px;font-weight:600}.hud-right span{display:block;color:#9ab1c4;font-size:10px}.hud-right small{font-size:9px;color:#5e8d9d}.arena-instruction{position:absolute;bottom:62px;left:50%;transform:translateX(-50%);font-size:12px;background:#121c29bf;padding:9px 15px;border:1px solid #ffffff10;border-radius:6px;pointer-events:none;max-width:90vw;width:max-content}.speed-label{position:absolute;top:120px;left:50%;transform:translateX(-50%);font-size:10px;color:var(--cyan);padding:4px 10px;background:#0e2431b8;border-radius:4px;border:1px solid #69dbe725}.arena-bottom{position:absolute;bottom:16px;left:30px;right:30px;display:flex;justify-content:space-between;align-items:center;font-size:10px;color:#6b8ba3;gap:20px;pointer-events:none}.arena-bottom button{pointer-events:auto}.session-bar{position:absolute;bottom:0;left:0;width:100%;height:3px;background:#ffffff08}.session-bar i{height:100%;display:block;background:var(--cyan);width:0}.live-hit{position:absolute;top:calc(50% + 38px);left:50%;transform:translateX(-50%);color:var(--green);font-size:10px;opacity:0;pointer-events:none}.live-hit.flash{animation:hit .24s ease-out}@keyframes hit{0%{opacity:1;transform:translate(-50%,3px)}100%{opacity:0;transform:translate(-50%,-4px)}}
+.overlay{position:absolute;inset:0;z-index:5;display:grid;place-items:center;background:#0c1421bd;backdrop-filter:blur(7px)}.dialog{border:1px solid #3d5264;background:linear-gradient(130deg,#202f40,#141e2c);border-radius:14px;width:min(440px,calc(100% - 28px));padding:32px;text-align:center;box-shadow:0 20px 90px #0006}.dialog .eyebrow{justify-content:center;font-size:8px}.dialog h2{font-size:24px;font-weight:650;margin:14px 0 9px;letter-spacing:-.03em}.dialog p{font-size:12px;color:#97acc0;line-height:1.9;margin:0 0 23px;white-space:pre-line}.dialog button{width:100%;margin-top:9px}.adapt{position:absolute;top:30%;left:50%;transform:translate(-50%,-50%);display:flex;align-items:center;flex-direction:column;pointer-events:none;text-align:center;text-shadow:0 3px 18px #0008}.adapt>span{color:var(--cyan);font-size:10px;letter-spacing:.15em}.adapt strong{margin-top:6px;font-size:24px;font-weight:650}.adapt small{font-size:10px;color:#a0b5c8;margin-top:6px}.adapt>b{font-size:28px;color:#e4f7ff;font-weight:450;margin-top:8px}dialog{color:var(--text);background:#172230;border:1px solid #3c5165;border-radius:14px;width:min(580px,calc(100% - 32px));padding:32px;box-shadow:0 20px 90px #0008}dialog::backdrop{background:#080f19b8;backdrop-filter:blur(6px)}dialog h2{font-size:22px;margin:15px 0}dialog p{font-size:12px;color:#9fb0c2;line-height:1.9}.dialog-close{position:absolute;top:12px;right:15px;border:0;background:transparent;color:#a6bdd0;font-size:24px}.source-links{display:flex;flex-direction:column;gap:10px;margin-top:21px}.source-links a{color:var(--cyan);font-size:11px;text-decoration:none}
+@media(min-width:1500px){main{padding-top:50px}.scene-preview{height:308px}.task-card{padding:20px 17px}.workspace{gap:28px;grid-template-columns:325px minmax(0,1fr)}.hero-title h1{font-size:48px}.hero-title{margin-bottom:35px}.settings{padding:26px}}
+@media(max-width:1100px){aside{padding-left:18px}.layout{grid-template-columns:175px 1fr}main{padding:31px 26px 0}.workspace{grid-template-columns:280px minmax(0,1fr);gap:17px}.settings{padding:19px}.hero-title p{font-size:10px}.task-card{padding:12px 10px;gap:9px}.task-icon{width:27px;height:27px}.preview-top i{display:none}.scene-preview{height:240px}.task-card p{font-size:8px}}
+@media(max-width:900px){header{margin:0 23px;height:74px}.layout{grid-template-columns:1fr}aside{display:none}main{padding:29px 23px 0;margin:0;max-width:none}.hero-title h1{font-size:37px}.workspace{grid-template-columns:300px 1fr}.task-grid{grid-template-columns:1fr}.task-card p{display:none}.task-card{align-items:center;padding:10px}.task-card h3{margin:0}.scene-preview{height:220px}.preview-bottom{gap:11px;font-size:8px}.preview-bottom b{font-size:12px}.method-strip{font-size:8px}.method-note{font-size:8px}.report-top{gap:12px}}
+@media(max-width:640px){header{margin:0 18px;height:68px}.wordmark{font-size:13px;gap:6px}.wordmark-sub{font-size:6px}.logo{font-size:30px}.header-right{gap:13px}.local{font-size:9px}.header-right .subtle{font-size:9px}main{padding:26px 18px 0}.hero-title{display:block;margin:13px 0 24px}.hero-title h1{font-size:34px}.hero-title h1 span{display:inline}.hero-title p{margin-top:15px;font-size:11px}.workspace{grid-template-columns:1fr}.settings{padding:21px}.training-overview{order:-1}.scene-preview{height:202px}.task-grid{grid-template-columns:1fr 1fr;gap:8px}.task-card h3{font-size:10px}.task-card .en{font-size:6px}.task-card{padding:12px 9px}.method-strip,.method-note{display:none}.preview-top i{display:block}.eyebrow{font-size:8px;gap:9px}.eyebrow>span{font-size:8px;padding-left:9px}.report-title{font-size:25px}.report-top{grid-template-columns:1fr}.recommend{padding:22px}.metric{padding:15px}.metric strong{font-size:23px}.game-result-grid{grid-template-columns:1fr}.game-result{display:flex;align-items:center;gap:15px;flex-wrap:wrap;padding:12px 15px}.game-result b{margin:0 0 0 auto;font-size:20px}.game-result span{min-width:100px}.game-result small{width:100%}.game-results,.data-panel{padding:15px}.game-results .panel-heading small{font-size:8px}.chart{gap:5px}.result-actions .primary{width:100%}.history-row{gap:12px}.history-row strong{font-size:13px}.history-row>span{font-size:9px}footer{font-size:8px;gap:10px;padding:18px 0;margin-top:26px}.hud{padding:13px 14px;grid-template-columns:1fr 90px 1fr;gap:8px}.hud h2{font-size:15px}.phase{font-size:8px}.hud p{font-size:8px}.remaining{font-size:23px}.run-progress{width:80px}.hud-right strong{font-size:21px}.hud-right span,.hud-right small{font-size:8px}.arena-instruction{font-size:10px;bottom:55px;padding:8px 10px}.arena-bottom{font-size:8px;left:13px;right:13px;bottom:12px;gap:10px}.arena-bottom>span:last-child{display:none}.dialog{padding:25px}.dialog h2{font-size:21px}.speed-label{top:98px}.adapt strong{font-size:20px}.adapt small{font-size:9px}.dialog .primary{min-height:45px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+/* Graphite interface surfaces; training canvas retains its task colors. */
+:root{--bg:#181a1b;--panel:#232729;--line:#3d4643;--muted:#a4ada9;--text:#deded8;--cyan:#b3c9bd;--violet:#c6bfce;--green:#b4d0b8;--red:#dba9a6}
+body{background:var(--bg)}.panel{background:linear-gradient(135deg,#282e2c,#222729)}.nav.active{background:#303d35;border-color:#627a68}.nav,.nav-label,.wordmark-sub,.aside-bottom p,.offline,.settings-note,.tiny,.method-note,.method-strip,.task-card .en,.task-card p,.eyebrow>span,footer{color:#a4ada9}.aside-bottom strong{color:#c3cec1}label{color:#b6beb6}input[type=number],select{background:#1c2220;color:#dfe3da;border-color:#465449}input[type=number]:focus,select:focus{border-color:#9eb4a3;box-shadow:0 0 0 3px #9eb4a31e}.baseline{background:#2b3930;border-color:#506355}.baseline>span,.baseline small,.advanced summary,.text-btn{color:#b2c1b0}.primary{background:#b3c9bd;border-color:#b3c9bd;color:#1b2b20;box-shadow:none}.primary:hover{background:#c4d7ca;border-color:#c4d7ca}.secondary{background:#303d35;border-color:#627a68;color:#d1dfcd}.secondary:hover{background:#3b5141;border-color:#819989}.task-card,.metric,.game-result{background:#242c27;border-color:#465449}.task-icon,.task-card:nth-child(even) .task-icon{background:#303d35;border-color:#627a68;color:#c4d7ca}.recommend{background:linear-gradient(130deg,#303d35,#232927);border-color:#627a68}.dialog,dialog{background:linear-gradient(130deg,#2e3b32,#222927);border-color:#627a68}.recommend p,.metric span,.metric small,.game-result span,.game-result small,.kicker,.recommended-value small,.game-result b,th,.history-row p,.history-row>span,dialog p,.dialog p{color:#b4c1ae}.copy-value{background:#303d35;border-color:#627a68;color:#d1dfcd}.chart-col.best>div{background:linear-gradient(0deg,#607d68,#b3c9bd)}
+</style></head>
+<body>
+<div class="app" id="app">
+<header><a class="wordmark" href="#" id="brandHome"><span class="logo">⊕</span><span>AIM FEEL<span class="wordmark-sub">SENSITIVITY LAB</span></span></a><div class="header-right"><span class="local"><i></i> 独立本地版</span><button class="subtle" id="sourcesBtn">制作说明 ↗</button></div></header>
+<div class="layout"><aside><div class="nav-label">YOUR AIM. YOUR SENS.</div><button class="nav active" id="navFinder"><span>◎</span> 灵敏度查找器 <small>01</small></button><button class="nav" id="navHistory"><span>↗</span> 校准记录 <small id="historyCount">0</small></button><div class="aside-bottom"><div class="mini-cross">+</div><strong>找到你的控制感。</strong><p>从一次稳定的瞄准开始。</p><div class="offline">● OFFLINE & PRIVATE</div></div></aside>
+<main>
+<section id="setupView">
+<div class="eyebrow">SENSITIVITY FINDER <span>独立实验版 / 01</span></div><div class="hero-title"><h1>找到适合你的<span>灵敏度。</span></h1><p>让每一次瞄准，都更接近你的直觉。<br>在第一人称训练场中比较表现，再用复测确认。</p></div>
+<div class="workspace"><section class="settings panel"><div class="panel-heading"><span>01</span><h2>建立你的基准</h2></div><label for="game">游戏配置</label><select id="game"><option value="valorant">VALORANT · 无畏契约</option><option value="cs2">Counter-Strike 2</option><option value="delta">Delta Force · 三角洲行动（估算）</option><option value="aimlabs">Aimlabs 原生 · yaw 0.05（请核对 FOV）</option></select><label for="goal">推荐用途</label><select id="goal"><option value="precision">定位优先 · 无畏契约 / CS2</option><option value="tracking">跟枪优先 · 连续追踪</option><option value="balanced">均衡训练 · 定位与跟枪</option></select><div class="field-pair"><div><label for="sens">当前游戏灵敏度</label><input id="sens" type="number" min="0.001" step="any" value="0.35"></div><div><label for="dpi">鼠标 DPI</label><input id="dpi" type="number" min="100" max="64000" step="100" value="800"></div></div><div class="baseline"><span>当前转身距离</span><strong id="baselineCm">47.20 <small>cm / 360°</small></strong></div><div class="tiny">DPI 请在鼠标驱动中查看，网页无法自动读取。</div><label for="length">校准时长</label><select id="length"><option value="standard">标准校准 · 约 14 分钟 · 三轮独立复测</option><option value="quick">快速预览 · 约 5 分钟 · 不作正式推荐</option></select><details class="advanced"><summary>视野与训练选项</summary><label for="fov">水平视野 FOV（度）</label><input id="fov" type="number" min="60" max="130" value="103"><div class="checkline"><label><input id="sound" type="checkbox" checked> 命中音效</label><label><input id="fullscreen" type="checkbox" checked> 全屏训练</label></div></details><div class="error" id="setupError" role="alert"></div><button class="primary" id="beginBtn">开始寻找我的灵敏度 <span>↗</span></button><button class="text-btn" id="demoBtn">先看看第一人称训练场 →</button><div class="settings-note">建议使用电脑鼠标 · Esc 暂停 · 数据保存在本机</div></section>
+<section class="training-overview"><div class="scene-preview"><canvas id="previewCanvas" aria-label="第一人称训练场预览"></canvas><div class="preview-top"><span>FIRST-PERSON ARENA</span><i>固定准星 · 视角转动</i></div><div class="preview-center">＋</div><div class="preview-bottom"><span><b>4</b> 类瞄准任务</span><span><b>3</b> 档跟枪速度</span><span><b>1</b> 轮独立复测</span></div></div><div class="task-grid" id="taskCards"></div><div class="method-strip"><span>热身适应</span><b>→</b><span>范围比较</span><b>→</b><span>精细收敛</span><b>→</b><span>结果复测</span></div><p class="method-note">参考 Aimlabs 的公开机制重新实现。任务参数与算法为独立设计，无法保证与原版计算结果相同。</p></section></div>
+</section>
+<section id="resultsView" class="hidden" aria-labelledby="resultTitle"><div class="eyebrow">YOUR SENSITIVITY REPORT <span>本轮校准报告</span></div><h1 class="report-title" id="resultTitle">让数据，帮你找到节奏。</h1><div class="report-top"><div class="recommend panel"><div class="kicker" id="reportStatus">本轮表现参考</div><div class="recommended-value"><span id="recommendedCm">—</span><small>cm / 360°</small></div><div id="recommendedGame" class="recommend-game"></div><p id="evidenceText"></p><p id="domainAdvice"></p><div class="comparison" id="comparison"></div></div><div class="metrics-grid" id="metrics"></div></div><div class="panel game-results"><div class="panel-heading"><span>↗</span><h2>对应游戏内灵敏度</h2><small id="resultDpi"></small></div><div id="gameResults" class="game-result-grid"></div><p class="tiny">腰射 / 360° 旋转距离匹配。开镜、FOV、加速度与拉伸可能影响体感；三角洲参数为估算。</p></div><div class="panel data-panel"><div class="panel-heading"><span>02</span><h2>候选表现与分项结果</h2></div><div class="chart" id="scoreChart"></div><div class="table-scroll"><table><thead><tr><th>距离</th><th>定位命中</th><th>精细命中</th><th>平滑跟枪</th><th>变向跟枪</th><th>阶段参考 = 100</th></tr></thead><tbody id="scoreTable"></tbody></table></div></div><div class="result-actions"><button class="primary" id="retestBtn">以建议值再测一次 ↗</button><button class="secondary" id="exportBtn">导出本轮数据</button><button class="subtle" id="resultBack">返回设置</button></div></section>
+<section id="historyView" class="hidden"><div class="eyebrow">YOUR AIM JOURNAL <span>仅此浏览器可见</span></div><h1 class="report-title">每一次练习，都有迹可循。</h1><div class="panel history-list" id="historyList"></div><button class="secondary" id="historyBack">返回灵敏度查找器</button></section>
+<footer><span>稳定的手感，来自理解自己。</span><span>个人训练参考 · 非 Aimlabs 官方产品</span></footer>
+</main></div></div>
+<div class="arena hidden" id="arena"><canvas id="arenaCanvas"></canvas><div class="hud" id="hud"><div class="hud-left"><div class="phase" id="phaseLabel">热身</div><h2 id="taskName">大范围甩枪</h2><p id="runLabel"></p></div><div class="hud-center"><div class="remaining" id="timer">00:12</div><div class="run-progress"><i id="runProgress"></i></div></div><div class="hud-right"><strong id="liveValue">0%</strong><span id="liveLabel">命中率</span><small id="inputMode">等待鼠标锁定</small></div></div><div class="arena-instruction" id="instruction"></div><div class="speed-label hidden" id="speedLabel">慢速</div><div class="live-hit" id="hitLabel"></div><div class="arena-bottom"><span id="sessionProgress">热身准备</span><button id="demoExit" class="secondary hidden">退出训练场预览</button><span>ESC 暂停 · 鼠标移动控制视角</span></div><div class="session-bar"><i id="sessionBar"></i></div><div class="overlay hidden" id="overlay"><div class="dialog"><span class="eyebrow" id="overlayKicker">READY WHEN YOU ARE</span><h2 id="overlayTitle">准备进入训练场</h2><p id="overlayText"></p><button class="primary" id="resumeBtn">锁定鼠标并开始 ↗</button><button class="secondary" id="abortBtn">返回设置</button></div></div><div class="adapt hidden" id="adapt"><span id="adaptStage">新任务</span><strong id="adaptTitle">适应当前灵敏度</strong><small id="adaptNote"></small><b id="adaptCount">2</b></div></div>
+<dialog id="sourcesDialog"><button id="closeSources" class="dialog-close" aria-label="关闭说明">×</button><div class="eyebrow">ABOUT THIS EXPERIMENT</div><h2>能复刻体验，不能伪称官方算法。</h2><p>这是一套参考 Aimlabs 公开说明、独立编写的第一人称灵敏度实验。包含旋转视角、原始鼠标输入请求、甩枪与跟枪任务、候选比较、收敛及验证。</p><p>Aimlabs 公开介绍会分析过甩、欠甩和跟踪速度；新版还利用训练历史持续更新。官方的完整目标参数、模型权重和源代码未在这些资料中给出，本程序没有这些内部实现。</p><p>这里采用同一路径比较、用途分权、三轮配对复测和重采样区间检查。参考值为 100，不再将每项最好值强制视为 100 分。重复不足、改进不稳定或输入条件不足时保留原设置。快速模式仅供体验。</p><div class="source-links"><a href="https://aimlabs.com/articles/aimlabs/aimlabs-mouselabs-explained-smarter-sensitivity-finder-better-results/" target="_blank" rel="noopener">Aimlabs · Mouselabs 公开说明 ↗</a><a href="https://www.aimlabs.com/articles/aimlabs/aimlabs-1-3-2-patch-notes/" target="_blank" rel="noopener">Aimlabs · Universal Sens Finder 说明 ↗</a><a href="https://www.frontiersin.org/journals/human-neuroscience/articles/10.3389/fnhum.2022.979293/full" target="_blank" rel="noopener">Statespace 作者论文 · 任务与运动分析 ↗</a><a href="https://research.nvidia.com/publication/2023-07_mouse-sensitivity-first-person-targeting-tasks" target="_blank" rel="noopener">NVIDIA 研究 · 速度与精度权衡 ↗</a></div></dialog>
+<script>
+(function (root, factory) {
+  const api = factory();
+  if (typeof module === 'object' && module.exports) module.exports = api;
+  else root.SensCore = api;
+})(typeof globalThis !== 'undefined' ? globalThis : this, function () {
+  'use strict';
+  const DEG = Math.PI / 180;
+  const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+  const mean = a => a.length ? a.reduce((s, v) => s + v, 0) / a.length : 0;
+  const median = a => { const b = [...a].sort((x, y) => x - y); return b.length ? (b[Math.floor((b.length - 1) / 2)] + b[Math.ceil((b.length - 1) / 2)]) / 2 : 0; };
+  const TASKS = [
+    { id: 'flick', name: '大范围甩枪', en: 'WIDE FLICK', group: '定位', count: 3, radius: .43, color: '#69dbe7', instruction: '移动视角，让准星对准圆球 · 单击命中', desc: '三目标切换，观察定位速度与过甩、欠甩。' },
+    { id: 'micro', name: '精细瞄准', en: 'MICRO PRECISION', group: '定位', count: 6, radius: .21, color: '#c2b9ff', instruction: '瞄准较小的圆球 · 稳定后单击命中', desc: '六个小目标，比较细微修正与点击精度。' },
+    { id: 'smooth', name: '平滑跟枪', en: 'SMOOTH TRACK', group: '跟枪', count: 1, radius: .48, color: '#69dbe7', instruction: '持续跟随圆球 · 进入目标时变绿 · 可按住左键射击', desc: '慢、中、快三种速度，观察持续跟随能力。' },
+    { id: 'strafe', name: '变向跟枪', en: 'REACTIVE TRACK', group: '跟枪', count: 1, radius: .48, color: '#c2b9ff', instruction: '跟随快速变向的圆球 · 及时调整视角', desc: '侧向移动与反向切换，比较追赶与修正能力。' }
+  ];
+  const profiles = {
+    aimlabs: { name: 'Aimlabs 原生', yaw: .05, fov: 103, sens: .5, digits: 3 },
+    valorant: { name: '无畏契约', yaw: .022 / .318, fov: 103, sens: .35, digits: 3 },
+    cs2: { name: 'Counter-Strike 2', yaw: .022, fov: 106.26, sens: 1.1, digits: 3 },
+    delta: { name: '三角洲行动', yaw: .022, fov: 90, sens: 1, digits: 2, estimate: true }
+  };
+  // User-selected priorities; these are independent design choices, not Aimlabs weights.
+  const GOALS = {
+    precision: { name: '定位优先', weights: { flick: .35, micro: .5, smooth: .1, strafe: .05 } },
+    tracking: { name: '跟枪优先', weights: { flick: .1, micro: .05, smooth: .45, strafe: .4 } },
+    balanced: { name: '均衡训练', weights: { flick: .25, micro: .25, smooth: .25, strafe: .25 } }
+  };
+  function rng(seed) { let x = seed >>> 0; return () => { x += 0x6D2B79F5; let t = x; t = Math.imul(t ^ t >>> 15, t | 1); t ^= t + Math.imul(t ^ t >>> 7, t | 61); return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+  function shuffle(a, rand = Math.random) { const b = [...a]; for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(rand() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; } return b; }
+  function cm360(dpi, sens, yaw) { return 914.4 / (dpi * sens * yaw); }
+  function sensitivity(dpi, cm, yaw) { return 914.4 / (dpi * cm * yaw); }
+  function radPerCount(dpi, cm) { return 914.4 / (dpi * cm) * DEG; }
+  function dir(yaw, pitch) { const p = Math.cos(pitch); return { x: Math.sin(yaw) * p, y: Math.sin(pitch), z: Math.cos(yaw) * p }; }
+  function angleTo(p) { return { yaw: Math.atan2(p.x, p.z), pitch: Math.atan2(p.y, Math.hypot(p.x, p.z)) }; }
+  function project(p, camera, width, height, hfov) {
+    const sy = Math.sin(camera.yaw), cy = Math.cos(camera.yaw), sp = Math.sin(camera.pitch), cp = Math.cos(camera.pitch);
+    const x = cy * p.x - sy * p.z, z0 = sy * p.x + cy * p.z;
+    const y = cp * p.y - sp * z0, z = sp * p.y + cp * z0;
+    if (z < .15) return null;
+    const f = width / (2 * Math.tan(hfov * DEG / 2));
+    return { x: width / 2 + f * x / z, y: height / 2 - f * y / z, z, scale: f / z };
+  }
+  function rayHit(camera, sphere) {
+    const d = dir(camera.yaw, camera.pitch), dot = d.x * sphere.x + d.y * sphere.y + d.z * sphere.z;
+    return dot > 0 && sphere.x ** 2 + sphere.y ** 2 + sphere.z ** 2 - dot ** 2 <= sphere.r ** 2;
+  }
+  function angularError(camera, target) {
+    const d = dir(camera.yaw, camera.pitch), len = Math.hypot(target.x, target.y, target.z);
+    return Math.acos(clamp((d.x * target.x + d.y * target.y + d.z * target.z) / len, -1, 1)) / DEG;
+  }
+  function sphereAt(yawDegrees, pitchDegrees, radius = .4) {
+    const d = dir(yawDegrees * DEG, pitchDegrees * DEG);
+    return { x: d.x * 15, y: d.y * 15, z: d.z * 15, r: radius };
+  }
+  function trackPoint(task, time, duration, phaseOffset = .35) {
+    const bucket = Math.min(2, Math.floor(time / (duration / 3)));
+    // World angular speed, independent of screen size and refresh rate.
+    const limits = task === 'strafe' ? [28, 60, 100] : [22, 48, 85];
+    let travelled = phaseOffset;
+    for (let i = 0; i <= bucket; i++) travelled += limits[i] * Math.max(0, Math.min(time - i * duration / 3, duration / 3));
+    let yaw, pitch;
+    if (task === 'strafe') { const t = ((travelled + 28) % 112 + 112) % 112; yaw = t < 56 ? t - 28 : 84 - t; pitch = 4 * Math.sin(time * 1.3); }
+    else { const a = travelled / 28; yaw = 28 * Math.sin(a); pitch = 8 * Math.sin(a * .53); }
+    return { ...sphereAt(yaw, pitch, .48), bucket, speed: limits[bucket] };
+  }
+  function makeBlock(cms, stage, duration, repeats, seed) {
+    const random = rng(seed), rows = [];
+    for (let repeat = 0; repeat < repeats; repeat++) for (let taskIndex = 0; taskIndex < TASKS.length; taskIndex++) {
+      for (const cm of shuffle(cms, random)) rows.push({ task: TASKS[taskIndex].id, cm, stage, duration, repeat, seed: seed + repeat * 101 + taskIndex * 1009 });
+    }
+    return rows;
+  }
+  function metric(r) {
+    if (r.task === 'flick' || r.task === 'micro') return (r.hits / Math.max(1, r.elapsed)) * (.35 + .65 * (r.shots ? r.hits / r.shots : 0));
+    return r.elapsed ? r.onTime / r.elapsed : 0;
+  }
+  function logEffect(task, candidate, reference) {
+    // A tiny, noisy tracking rate must not gain huge weight by dividing by its maximum.
+    const floor = task === 'flick' || task === 'micro' ? .15 : .03;
+    return clamp(Math.log((Math.max(0, candidate) + floor) / (Math.max(0, reference) + floor)), -Math.log(2), Math.log(2));
+  }
+  function rank(records, options = {}) {
+    const rows = records.filter(r => r.stage !== 'warmup' && r.elapsed > 0);
+    const candidates = [...new Set(rows.map(r => r.cm))].filter(cm => TASKS.every(t => rows.some(r => r.cm === cm && r.task === t.id)));
+    if (!candidates.length) return [];
+    const requested = options.baseline || candidates[Math.floor(candidates.length / 2)], anchorCm = [...candidates].sort((a, b) => Math.abs(Math.log(a / requested)) - Math.abs(Math.log(b / requested)))[0];
+    const weights = (GOALS[options.goal] || GOALS.balanced).weights;
+    const references = Object.fromEntries(TASKS.map(t => [t.id, mean(rows.filter(r => r.cm === anchorCm && r.task === t.id).map(metric))]));
+    return candidates.map(cm => {
+      const runs = rows.filter(r => r.cm === cm), parts = {};
+      let effect = 0;
+      for (const t of TASKS) { const entries = runs.filter(r => r.task === t.id), delta = logEffect(t.id, mean(entries.map(metric)), references[t.id]); parts[t.id] = 100 * Math.exp(delta); effect += weights[t.id] * delta; }
+      return { cm, score: 100 * Math.exp(effect), parts, runs, anchorCm, complete: TASKS.every(t => runs.some(r => r.task === t.id)) };
+    }).filter(r => r.complete).sort((a, b) => b.score - a.score);
+  }
+  function choose(records, baseline, goal = 'balanced') {
+    const eligible = records.filter(r => r.stage !== 'warmup');
+    const ranking = rank(eligible, { baseline, goal }), allHits = eligible.reduce((s, r) => s + (r.hits || 0), 0), on = eligible.reduce((s, r) => s + (r.onTime || 0), 0);
+    if (!ranking.length || allHits < 6 || on < 1) return { cm: baseline, ranking, insufficient: true };
+    return { cm: ranking[0].cm, ranking, insufficient: false };
+  }
+  function compareMatched(records, candidateCm, baselineCm, options = {}) {
+    const goal = GOALS[options.goal] || GOALS.balanced, grouped = Object.fromEntries(TASKS.map(t => [t.id, []]));
+    if (Math.abs(candidateCm - baselineCm) < .001) return { accepted: false, reason: 'same', improvement: 0, interval: [0, 0], pairs: 0, repeats: 0 };
+    const rows = records.filter(r => r.stage === 'verify' && r.elapsed > 0);
+    for (const r of rows.filter(r => Math.abs(r.cm - candidateCm) < .001)) {
+      const base = rows.find(b => Math.abs(b.cm - baselineCm) < .001 && b.task === r.task && b.repeat === r.repeat && b.seed === r.seed);
+      if (base) grouped[r.task].push({ effect: logEffect(r.task, metric(r), metric(base)), r, base });
+    }
+    const counts = TASKS.map(t => grouped[t.id].length), repeats = Math.min(...counts), pairs = counts.reduce((a, b) => a + b, 0);
+    const effect = TASKS.reduce((s, t) => s + goal.weights[t.id] * mean(grouped[t.id].map(p => p.effect)), 0), improvement = 100 * Math.expm1(effect);
+    const baseResult = { accepted: false, improvement, pairs, repeats, interval: null };
+    if (repeats < (options.minRepeats || 3)) return { ...baseResult, reason: 'repeat' };
+    for (const id of ['flick', 'micro']) for (const side of ['r', 'base']) if (grouped[id].reduce((s, p) => s + p[side].hits, 0) < 12) return { ...baseResult, reason: 'samples' };
+    for (const id of ['smooth', 'strafe']) for (const side of ['r', 'base']) if (grouped[id].reduce((s, p) => s + p[side].onTime, 0) < 1) return { ...baseResult, reason: 'samples' };
+    const random = rng(90421), boot = [];
+    for (let i = 0; i < 1200; i++) { let sum = 0; for (const t of TASKS) { const a = grouped[t.id], sampled = a.map(() => a[Math.floor(random() * a.length)].effect); sum += goal.weights[t.id] * mean(sampled); } boot.push(100 * Math.expm1(sum)); }
+    boot.sort((a, b) => a - b); const interval = [boot[Math.floor(boot.length * .025)], boot[Math.floor(boot.length * .975)]];
+    if (options.raw === false) return { ...baseResult, interval, reason: 'input' };
+    if (options.unstable) return { ...baseResult, interval, reason: 'frames' };
+    if (interval[0] <= 0 || improvement < 2) return { ...baseResult, interval, reason: 'uncertain' };
+    return { ...baseResult, interval, accepted: true, reason: 'supported' };
+  }
+  function coarse(base) { return [...new Set([base * 1.4, base, base / 1.4].map(v => +clamp(v, 5, 150).toFixed(3)))]; }
+  function refine(best, tested) {
+    const min = Math.min(...tested), max = Math.max(...tested);
+    const scales = best <= min + .001 ? [1, 1 / 1.12, 1 / 1.25] : best >= max - .001 ? [1, 1.12, 1.25] : [1.12, 1, 1 / 1.12];
+    return [...new Set(scales.map(k => +clamp(best * k, 5, 150).toFixed(3)))];
+  }
+  return { DEG, clamp, mean, median, TASKS, profiles, GOALS, rng, shuffle, cm360, sensitivity, radPerCount, dir, angleTo, project, rayHit, angularError, sphereAt, trackPoint, makeBlock, metric, logEffect, rank, choose, compareMatched, coarse, refine };
+});
+
+</script><script>
+(() => {
+  'use strict';
+  const C = window.SensCore, $ = id => document.getElementById(id);
+  const stageNames = { warmup: '热身适应 · 不计成绩', coarse: '范围比较', refine: '精细收敛', verify: '结果复测' };
+  const state = { session: null, demo: false, running: false, paused: false, raw: false, held: false, pointerPending: false, lastReport: null, raf: 0, lastFrame: 0, lastHud: 0, frames: [], fx: [], hitAt: 0, camera: { yaw: 0, pitch: 0 } };
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const pct = v => (100 * (Number.isFinite(v) ? v : 0)).toFixed(1) + '%';
+  const roundCm = v => Number(v.toFixed(3));
+  const wrapAngle = v => Math.atan2(Math.sin(v), Math.cos(v));
+  const taskById = id => C.TASKS.find(t => t.id === id);
+  let audio = null, previousGame = 'valorant', storageAvailable = true, hostVisible = true;
+  function history() { try { const rows = JSON.parse(localStorage.getItem('aim-feel-finder-v2') || '[]'); return Array.isArray(rows) ? rows.slice(-100) : []; } catch { storageAvailable = false; return []; } }
+  function saveHistory(row) { try { localStorage.setItem('aim-feel-finder-v2', JSON.stringify([...history(), row].slice(-100))); } catch { storageAvailable = false; } updateHistoryCount(); }
+  function updateHistoryCount() { $('historyCount').textContent = history().length; }
+  function soundHit() {
+    if (!$('sound').checked) return;
+    try { audio ||= new (window.AudioContext || window.webkitAudioContext)(); if (audio.state === 'suspended') audio.resume(); const o = audio.createOscillator(), g = audio.createGain(), t = audio.currentTime; o.type = 'sine'; o.frequency.setValueAtTime(1100, t); o.frequency.exponentialRampToValueAtTime(520, t + .055); g.gain.setValueAtTime(.035, t); g.gain.exponentialRampToValueAtTime(.001, t + .07); o.connect(g).connect(audio.destination); o.start(t); o.stop(t + .08); } catch {}
+  }
+
+  class RoomRenderer {
+    constructor(canvas) {
+      this.canvas = canvas; this.ctx = canvas.getContext('2d', { alpha: false }); this.lines = []; this.sprites = {};
+      for (let i = -16; i <= 16; i += 2) {
+        this.lines.push([{ x: i, y: -3.8, z: -16 }, { x: i, y: -3.8, z: 16 }], [{ x: -16, y: -3.8, z: i }, { x: 16, y: -3.8, z: i }]);
+        this.lines.push([{ x: i, y: -3.8, z: 16 }, { x: i, y: 8.2, z: 16 }], [{ x: i, y: -3.8, z: -16 }, { x: i, y: 8.2, z: -16 }]);
+        this.lines.push([{ x: -16, y: -3.8, z: i }, { x: -16, y: 8.2, z: i }], [{ x: 16, y: -3.8, z: i }, { x: 16, y: 8.2, z: i }]);
+      }
+      for (let y = -3.8; y <= 8.2; y += 2) this.lines.push([{ x: -16, y, z: 16 }, { x: 16, y, z: 16 }], [{ x: -16, y, z: -16 }, { x: 16, y, z: -16 }], [{ x: -16, y, z: -16 }, { x: -16, y, z: 16 }], [{ x: 16, y, z: -16 }, { x: 16, y, z: 16 }]);
+      for (const [name, colors] of Object.entries({ cyan: ['#d3ffff', '#57cddf', '#29748c'], violet: ['#edeaff', '#aea3ec', '#675c9e'], green: ['#ecfff2', '#8be6b4', '#3b9171'] })) {
+        const sp = document.createElement('canvas'); sp.width = sp.height = 100; const c = sp.getContext('2d'), g = c.createRadialGradient(35, 28, 2, 50, 50, 46); g.addColorStop(0, colors[0]); g.addColorStop(.45, colors[1]); g.addColorStop(1, colors[2]); c.beginPath(); c.arc(50, 50, 46, 0, Math.PI * 2); c.fillStyle = g; c.fill(); c.strokeStyle = colors[1]; c.lineWidth = 1; c.stroke(); this.sprites[name] = sp;
+      }
+      this.resize();
+    }
+    resize() {
+      const box = this.canvas.getBoundingClientRect(); this.w = Math.max(1, box.width || innerWidth); this.h = Math.max(1, box.height || innerHeight); const dpr = Math.min(devicePixelRatio || 1, 1.5); this.canvas.width = Math.round(this.w * dpr); this.canvas.height = Math.round(this.h * dpr); this.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      this.bg = document.createElement('canvas'); this.bg.width = this.canvas.width; this.bg.height = this.canvas.height; const b = this.bg.getContext('2d'); b.setTransform(dpr, 0, 0, dpr, 0, 0); const g = b.createLinearGradient(0, 0, 0, this.h); g.addColorStop(0, '#253242'); g.addColorStop(.6, '#283b4d'); g.addColorStop(1, '#111d2c'); b.fillStyle = g; b.fillRect(0, 0, this.w, this.h);
+    }
+    draw(camera, targets, fov, fx = [], now = performance.now(), crosshair = true) {
+      const { ctx: c, w, h } = this; c.drawImage(this.bg, 0, 0, w, h);
+      const sy = Math.sin(camera.yaw), cy = Math.cos(camera.yaw), sp = Math.sin(camera.pitch), cp = Math.cos(camera.pitch), focal = w / (2 * Math.tan(fov * C.DEG / 2));
+      const transform = p => { const x = cy * p.x - sy * p.z, z = sy * p.x + cy * p.z; return { x, y: cp * p.y - sp * z, z: sp * p.y + cp * z }; };
+      const screen = p => ({ x: w / 2 + focal * p.x / p.z, y: h / 2 - focal * p.y / p.z });
+      c.beginPath(); for (const [a0, b0] of this.lines) { let a = transform(a0), b = transform(b0); if (a.z < .2 && b.z < .2) continue; if (a.z < .2 || b.z < .2) { const behind = a.z < .2 ? a : b, front = a.z < .2 ? b : a, t = (.2 - behind.z) / (front.z - behind.z); const cut = { x: behind.x + (front.x - behind.x) * t, y: behind.y + (front.y - behind.y) * t, z: .2 }; if (a.z < .2) a = cut; else b = cut; } const pa = screen(a), pb = screen(b); c.moveTo(pa.x, pa.y); c.lineTo(pb.x, pb.y); }
+      c.strokeStyle = '#8baac326'; c.lineWidth = .7; c.stroke();
+      const visible = targets.map(t => ({ t, p: C.project(t, camera, w, h, fov) })).filter(o => o.p).sort((a, b) => b.p.z - a.p.z);
+      for (const { t, p } of visible) { const r = p.scale * t.r, on = C.rayHit(camera, t); if (p.x + r < 0 || p.x - r > w || p.y + r < 0 || p.y - r > h) continue; const sprite = this.sprites[on ? 'green' : t.violet ? 'violet' : 'cyan']; c.drawImage(sprite, p.x - r * 50 / 46, p.y - r * 50 / 46, r * 100 / 46, r * 100 / 46); if (on) { c.beginPath(); c.arc(p.x, p.y, r + 2, 0, Math.PI * 2); c.strokeStyle = '#b7ffd599'; c.lineWidth = 1; c.stroke(); } }
+      for (const effect of fx) { const age = (now - effect.at) / 350, p = C.project(effect.p, camera, w, h, fov); if (!p || age >= 1) continue; c.strokeStyle = 'rgba(147,242,192,' + (1 - age) + ')'; c.lineWidth = 2 * (1 - age) + .5; c.beginPath(); c.arc(p.x, p.y, 8 + 30 * age, 0, Math.PI * 2); c.stroke(); for (let i = 0; i < 6; i++) { const a = i * Math.PI / 3, r = 12 + 35 * age; c.beginPath(); c.moveTo(p.x + Math.cos(a) * r, p.y + Math.sin(a) * r); c.lineTo(p.x + Math.cos(a) * (r + 5 * (1 - age)), p.y + Math.sin(a) * (r + 5 * (1 - age))); c.stroke(); } }
+      if (crosshair) { const x = w / 2, y = h / 2; c.lineWidth = 2.8; c.strokeStyle = '#10212dd0'; c.beginPath(); c.moveTo(x - 10, y); c.lineTo(x - 3, y); c.moveTo(x + 3, y); c.lineTo(x + 10, y); c.moveTo(x, y - 10); c.lineTo(x, y - 3); c.moveTo(x, y + 3); c.lineTo(x, y + 10); c.stroke(); c.lineWidth = 1.3; c.strokeStyle = '#eeffff'; c.stroke(); c.fillStyle = '#fff'; c.fillRect(x - .7, y - .7, 1.4, 1.4); if (now - state.hitAt < 130) { c.beginPath(); c.strokeStyle = '#99efb7'; for (const [dx, dy] of [[-1, -1], [-1, 1], [1, -1], [1, 1]]) { c.moveTo(x + dx * 13, y + dy * 13); c.lineTo(x + dx * 18, y + dy * 18); } c.stroke(); } }
+    }
+  }
+  const previewRenderer = new RoomRenderer($('previewCanvas')), renderer = new RoomRenderer($('arenaCanvas'));
+  function preview() { previewRenderer.resize(); previewRenderer.draw({ yaw: -.045, pitch: -.025 }, [C.sphereAt(-17, 7, .65), C.sphereAt(9, 1.2, .57), { ...C.sphereAt(25, 10, .5), violet: true }], 92, [], performance.now(), false); }
+  const resizeObserver = new ResizeObserver(() => { preview(); if (!$('arena').classList.contains('hidden')) renderer.resize(); }); resizeObserver.observe($('previewCanvas'));
+  window.addEventListener('resize', () => { preview(); renderer.resize(); });
+
+  function formConfig() {
+    const game = $('game').value, goal = $('goal').value || 'precision', dpi = Number($('dpi').value), sens = Number($('sens').value), fov = Number($('fov').value), length = $('length').value;
+    if (!(dpi >= 100 && dpi <= 64000 && Number.isFinite(dpi) && sens > 0 && Number.isFinite(sens) && fov >= 60 && fov <= 130)) throw new Error('请检查灵敏度、DPI（100–64000）和水平 FOV（60–130°）。');
+    const base = roundCm(C.cm360(dpi, sens, C.profiles[game].yaw)); if (base < 5 || base > 150) throw new Error('当前设置对应 ' + base.toFixed(2) + ' cm/360°。本实验搜索范围是 5–150 cm/360°，请先调整基准。');
+    return { game, goal, dpi, sens, fov, length, base, duration: length === 'standard' ? 12 : 8, repeats: 1, refineRepeats: length === 'standard' ? 2 : 1, verifyRepeats: length === 'standard' ? 3 : 1 };
+  }
+  function updateBaseline() { try { const cfg = formConfig(); $('baselineCm').innerHTML = cfg.base.toFixed(2) + ' <small>cm / 360°</small>'; $('setupError').textContent = ''; } catch (e) { $('baselineCm').innerHTML = '— <small>cm / 360°</small>'; $('setupError').textContent = e.message; } }
+  function showView(view) {
+    for (const id of ['setupView', 'resultsView', 'historyView']) $(id).classList.toggle('hidden', id !== view);
+    $('navFinder').classList.toggle('active', view !== 'historyView'); $('navHistory').classList.toggle('active', view === 'historyView'); if (view === 'setupView') requestAnimationFrame(preview); window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  function setOverlay(title, text, buttonText = '锁定鼠标并继续 ↗') { $('overlayTitle').textContent = title; $('overlayText').textContent = text; $('resumeBtn').textContent = buttonText; $('overlay').classList.remove('hidden'); $('adapt').classList.add('hidden'); }
+  function enterArena() { $('arena').classList.remove('hidden'); $('app').inert = true; document.body.style.overflow = 'hidden'; renderer.resize(); state.fx = []; state.hitAt = 0; state.camera = { yaw: 0, pitch: 0 }; }
+  function leaveArena() {
+    state.running = false; state.demo = false; state.paused = false; state.held = false; cancelAnimationFrame(state.raf); if (document.pointerLockElement === $('arenaCanvas')) document.exitPointerLock(); if (document.fullscreenElement === $('arena')) document.exitFullscreen().catch(() => {}); $('arena').classList.add('hidden'); $('overlay').classList.add('hidden'); $('adapt').classList.add('hidden'); $('demoExit').classList.add('hidden'); document.body.style.overflow = ''; $('app').inert = false;
+  }
+  function begin() {
+    let cfg; try { cfg = formConfig(); } catch (e) { $('setupError').textContent = e.message; return; }
+    const seed = Math.floor(Math.random() * 0x3fffffff);
+    state.session = { cfg, seed, stage: 'warmup', queue: C.TASKS.map((t, i) => ({ task: t.id, stage: 'warmup', cm: cfg.base, duration: cfg.length === 'standard' ? 8 : 5, seed: seed + i * 701 })), records: [], coarseCms: C.coarse(cfg.base), proposedCm: cfg.base, completed: 0, expected: 4 + 12 * cfg.repeats + 12 * cfg.refineRepeats + 8 * cfg.verifyRepeats, trial: null, rawAll: true, startedAt: new Date().toISOString() };
+    state.raw = false; state.paused = true; state.pointerPending = false; enterArena(); $('demoExit').classList.add('hidden'); $('phaseLabel').textContent = '校准准备'; $('taskName').textContent = '找到适合你的灵敏度'; $('runLabel').textContent = '固定准星 · 旋转视角 · 鼠标原始输入'; $('inputMode').textContent = '等待鼠标锁定'; $('timer').textContent = '00:00'; $('liveValue').textContent = '0%'; $('liveLabel').textContent = '等待测量'; $('instruction').textContent = '进入训练场后，按 Esc 可暂停'; $('sessionProgress').textContent = '准备开始'; $('sessionBar').style.width = '0%'; setOverlay('准备进入训练场', '先热身，再逐档比较灵敏度。\n候选之间会有短暂适应时间，不计成绩。\n请保持 DPI、坐姿和鼠标垫空间一致。', '锁定鼠标并开始 ↗'); state.lastFrame = performance.now(); requestLock();
+  }
+  async function requestLock() {
+    if (!state.session || state.pointerPending || !hostVisible) return; state.pointerPending = true;
+    try {
+      if (!$('arenaCanvas').requestPointerLock) throw new Error('当前浏览器不支持鼠标锁定。请用电脑端 Chrome 或 Edge 打开。');
+      try { state.raw = true; const request = $('arenaCanvas').requestPointerLock({ unadjustedMovement: true }); if (request && request.then) await request; }
+      catch (e) { if (e.name !== 'NotSupportedError' && e.name !== 'TypeError') throw e; state.raw = false; const request = $('arenaCanvas').requestPointerLock(); if (request && request.then) await request; }
+      if (document.pointerLockElement === $('arenaCanvas')) { onLockReady(); if ($('fullscreen').checked && !document.fullscreenElement) { try { await $('arena').requestFullscreen(); renderer.resize(); } catch {} } }
+    } catch (e) { state.paused = true; setOverlay('未能锁定鼠标', (e.message || '请点击按钮重试。') + '\n需要由你点击开始。未锁定时不会产生校准结果。', '点击重试锁定 ↗'); }
+    finally { state.pointerPending = false; }
+  }
+  function onLockReady() {
+    if (!hostVisible) { if (document.pointerLockElement === $('arenaCanvas')) document.exitPointerLock(); return; }
+    if (!state.session || state.running) return; state.session.rawAll &&= state.raw; $('overlay').classList.add('hidden'); state.paused = false; state.running = true; state.held = false;
+    if (!state.session.trial) nextTrial(); else { const t = state.session.trial; t.adaptUntil = performance.now() + 1100; $('adaptStage').textContent = '恢复当前任务'; $('adaptTitle').textContent = taskById(t.spec.task).name; $('adaptNote').textContent = '短暂适应后，从暂停处继续'; $('adapt').classList.remove('hidden'); }
+    $('inputMode').textContent = state.raw ? 'RAW INPUT · 原始输入' : '系统鼠标输入 · 需复测'; state.lastFrame = performance.now(); cancelAnimationFrame(state.raf); state.raf = requestAnimationFrame(frame);
+  }
+  function nextStage() {
+    const s = state.session, cfg = s.cfg;
+    if (s.stage === 'warmup') { s.stage = 'coarse'; s.queue = C.makeBlock(s.coarseCms, 'coarse', cfg.duration, cfg.repeats, s.seed + 10000); }
+    else if (s.stage === 'coarse') { const result = C.choose(s.records.filter(r => r.stage === 'coarse'), cfg.base, cfg.goal); s.coarseResult = result; s.refineCms = C.refine(result.cm, s.coarseCms); s.stage = 'refine'; s.queue = C.makeBlock(s.refineCms, 'refine', cfg.duration, cfg.refineRepeats, s.seed + 20000); }
+    else if (s.stage === 'refine') { const result = C.choose(s.records.filter(r => r.stage === 'refine'), cfg.base, cfg.goal); s.refineResult = result; s.proposedCm = result.cm; s.stage = 'verify'; const cms = [...new Set([cfg.base, result.cm])]; s.expected = s.completed + cms.length * 4 * cfg.verifyRepeats; s.queue = C.makeBlock(cms, 'verify', cfg.duration, cfg.verifyRepeats, s.seed + 30000); }
+    else { finish(); return false; } return true;
+  }
+  function nextTrial() {
+    const s = state.session; if (!s) return; if (!s.queue.length && !nextStage()) return;
+    state.camera = { yaw: 0, pitch: 0 };
+    const spec = s.queue.shift(), t = { spec, elapsed: 0, targets: [], rng: C.rng(spec.seed), shots: 0, hits: 0, onTime: 0, firingOnTime: 0, angularIntegral: 0, speedIntegral: 0, speedOn: [0, 0, 0], speedTime: [0, 0, 0], over: 0, under: 0, side: 0, acquisitions: [], lastShot: -100, lastHitTime: 0, origin: { ...state.camera }, adaptUntil: performance.now() + (s.completed ? 1200 : 2400), prevCamera: { ...state.camera }, measuredFrames: 0, slowFrames: 0, prevTarget: null };
+    s.trial = t; state.fx = []; const task = taskById(spec.task); if (task.group === '定位') for (let i = 0; i < task.count; i++) t.targets.push(newTarget(t)); else t.targets = [C.trackPoint(spec.task, 0, spec.duration, .35)];
+    $('phaseLabel').textContent = stageNames[spec.stage]; $('taskName').textContent = task.name; $('runLabel').textContent = spec.cm.toFixed(2) + ' cm/360° · ' + C.profiles[s.cfg.game].name; $('instruction').textContent = task.instruction; $('adaptStage').textContent = stageNames[spec.stage]; $('adaptTitle').textContent = task.name; $('adaptNote').textContent = '适应当前灵敏度 · 接下来 ' + spec.duration + ' 秒计分'; $('adapt').classList.remove('hidden'); $('speedLabel').classList.toggle('hidden', task.group === '定位'); $('liveLabel').textContent = task.group === '定位' ? '命中率' : '跟踪在靶率'; $('sessionProgress').textContent = '小节 ' + (s.completed + 1) + ' / ' + s.expected + ' · ' + stageNames[spec.stage]; $('sessionBar').style.width = (s.completed / s.expected * 100) + '%'; updateHud(performance.now());
+  }
+  function newTarget(t) {
+    const task = taskById(t.spec.task); let target;
+    for (let tries = 0; tries < 40; tries++) { const yaw = (t.rng() - .5) * (t.spec.task === 'micro' ? 42 : 64), pitch = (t.rng() - .5) * (t.spec.task === 'micro' ? 22 : 28); target = { ...C.sphereAt(yaw, pitch, task.radius), violet: t.spec.task === 'micro', born: t.elapsed, attempted: false }; if (t.targets.every(other => Math.hypot(target.x - other.x, target.y - other.y, target.z - other.z) > task.radius * 3.5)) break; }
+    return target;
+  }
+  function move(e) {
+    if (!state.running || state.demo || document.pointerLockElement !== $('arenaCanvas') || !state.session?.trial) return;
+    const gain = C.radPerCount(state.session.cfg.dpi, state.session.trial.spec.cm);
+    state.camera.yaw = wrapAngle(state.camera.yaw + (e.movementX || 0) * gain); state.camera.pitch = C.clamp(state.camera.pitch - (e.movementY || 0) * gain, -85 * C.DEG, 85 * C.DEG);
+  }
+  function fire() {
+    if (!state.running || state.demo || !state.session?.trial || document.pointerLockElement !== $('arenaCanvas')) return;
+    const t = state.session.trial; if (performance.now() < t.adaptUntil || taskById(t.spec.task).group !== '定位' || t.elapsed - t.lastShot < .06) return;
+    t.lastShot = t.elapsed; t.shots++;
+    const targetIndex = t.targets.findIndex(target => C.rayHit(state.camera, target));
+    if (targetIndex >= 0) { const target = t.targets[targetIndex]; t.hits++; t.acquisitions.push(t.elapsed - t.lastHitTime); t.lastHitTime = t.elapsed; state.fx.push({ p: { ...target }, at: performance.now() }); state.hitAt = performance.now(); $('hitLabel').textContent = '命中 +1'; $('hitLabel').classList.remove('flash'); void $('hitLabel').offsetWidth; $('hitLabel').classList.add('flash'); t.targets.splice(targetIndex, 1); t.targets.push(newTarget(t)); t.origin = { ...state.camera }; soundHit(); }
+    else {
+      const nearest = [...t.targets].sort((a, b) => C.angularError(state.camera, a) - C.angularError(state.camera, b))[0];
+      if (nearest && !nearest.attempted) { nearest.attempted = true; const desired = C.angleTo(nearest), vx = wrapAngle(desired.yaw - t.origin.yaw), vy = desired.pitch - t.origin.pitch, ax = wrapAngle(state.camera.yaw - t.origin.yaw), ay = state.camera.pitch - t.origin.pitch, denom = vx * vx + vy * vy, ratio = denom > .000001 ? (ax * vx + ay * vy) / denom : 1; if (ratio > 1.05) t.over++; else if (ratio < .95) t.under++; else t.side++; }
+    }
+  }
+  function pauseTask(title = '校准已暂停', text = '鼠标已解锁。重新锁定后，会从本小节的暂停位置继续。') {
+    if (!state.session || state.demo) return; state.running = false; state.paused = true; state.held = false; cancelAnimationFrame(state.raf); if (document.pointerLockElement === $('arenaCanvas')) document.exitPointerLock(); setOverlay(title, text);
+  }
+  function updateHud(now) {
+    const t = state.session?.trial; if (!t) return; const task = taskById(t.spec.task), left = Math.max(0, t.spec.duration - t.elapsed); $('timer').textContent = '00:' + Math.ceil(left).toString().padStart(2, '0'); $('liveValue').textContent = task.group === '定位' ? pct(t.shots ? t.hits / t.shots : 0) : pct(t.elapsed ? t.onTime / t.elapsed : 0); $('runProgress').style.width = (t.elapsed / t.spec.duration * 100) + '%';
+    if (now < t.adaptUntil) { $('adaptCount').textContent = Math.ceil((t.adaptUntil - now) / 1000); } else $('adapt').classList.add('hidden');
+    if (task.group === '跟枪') { const bucket = Math.min(2, Math.floor(t.elapsed / (t.spec.duration / 3))); $('speedLabel').textContent = ['慢速', '中速', '快速'][bucket] + ' · ' + (t.spec.task === 'strafe' ? [28, 60, 100][bucket] : [22, 48, 85][bucket]) + '°/s ' + (t.spec.task === 'smooth' ? '峰值' : '侧向'); }
+  }
+  function measureTracking(t, dt) {
+    const n = Math.max(1, Math.ceil(dt / (1 / 240))), step = dt / n, camera = state.camera;
+    for (let i = 1; i <= n; i++) { const elapsed = t.elapsed + step * i, p = C.trackPoint(t.spec.task, elapsed, t.spec.duration, .35), a = i / n, interpolated = { yaw: t.prevCamera.yaw + wrapAngle(camera.yaw - t.prevCamera.yaw) * a, pitch: t.prevCamera.pitch + (camera.pitch - t.prevCamera.pitch) * a }; const on = C.rayHit(interpolated, p); t.speedTime[p.bucket] += step; if (on) { t.onTime += step; t.speedOn[p.bucket] += step; if (state.held) t.firingOnTime += step; } t.angularIntegral += C.angularError(interpolated, p) * step;
+      if (t.prevTarget) { const ta = C.angleTo(p), tb = C.angleTo(t.prevTarget), targetVelocity = Math.hypot(wrapAngle(ta.yaw - tb.yaw), ta.pitch - tb.pitch) / (step * C.DEG), cameraVelocity = Math.hypot(wrapAngle(camera.yaw - t.prevCamera.yaw), camera.pitch - t.prevCamera.pitch) / (Math.max(dt, .000001) * C.DEG); t.speedIntegral += Math.abs(targetVelocity - cameraVelocity) * step; } t.prevTarget = p;
+    }
+    t.targets[0] = C.trackPoint(t.spec.task, t.elapsed + dt, t.spec.duration, .35);
+  }
+  function frame(now) {
+    if (!state.running) return;
+    const rawDt = Math.max(0, (now - state.lastFrame) / 1000), dt = Math.min(rawDt, .1); state.lastFrame = now;
+    if (state.demo) { const t = now / 1000, sphere = C.trackPoint('smooth', t % 18, 18, .35), a = C.angleTo(sphere); state.camera = { yaw: a.yaw * .55 + Math.sin(t * .24) * .1, pitch: a.pitch * .5 }; renderer.draw(state.camera, [sphere, { ...C.sphereAt(-23, 9, .36), violet: true }, C.sphereAt(23, -9, .36)], 103, [], now); state.raf = requestAnimationFrame(frame); return; }
+    const t = state.session?.trial; if (!t) return;
+    if (rawDt > .5 && now > t.adaptUntil) { pauseTask('检测到训练中断', '为避免卡顿或切出窗口影响统计，计时已经暂停。继续后将保留本小节已完成的数据。'); return; }
+    if (now >= t.adaptUntil) { const measuredDt = Math.min(dt, t.spec.duration - t.elapsed); if (taskById(t.spec.task).group === '跟枪') measureTracking(t, measuredDt); t.elapsed += measuredDt; t.measuredFrames++; if (rawDt > .04) t.slowFrames++; }
+    t.prevCamera = { ...state.camera }; state.fx = state.fx.filter(fx => now - fx.at < 350); renderer.draw(state.camera, t.targets, state.session.cfg.fov, state.fx, now); if (now - state.lastHud >= 80) { updateHud(now); state.lastHud = now; }
+    if (t.elapsed >= t.spec.duration - .00001) { endTrial(); if (!state.running) return; }
+    state.raf = requestAnimationFrame(frame);
+  }
+  function endTrial() {
+    const s = state.session, t = s.trial;
+    if (t.spec.stage !== 'warmup') s.records.push({ ...t.spec, elapsed: t.elapsed, hits: t.hits, shots: t.shots, onTime: t.onTime, firingOnTime: t.firingOnTime, speedOn: [...t.speedOn], speedTime: [...t.speedTime], avgAngle: t.elapsed ? t.angularIntegral / t.elapsed : 0, avgSpeedError: t.elapsed ? t.speedIntegral / t.elapsed : 0, over: t.over, under: t.under, side: t.side, medianAcquisition: C.median(t.acquisitions), measuredFrames: t.measuredFrames, slowFrames: t.slowFrames, raw: state.raw });
+    s.completed++; nextTrial();
+  }
+  function finish() {
+    const s = state.session; if (!s) return;
+    const validation=C.choose(s.records.filter(r=>r.stage==='verify'),s.cfg.base,s.cfg.goal), tune=s.refineResult||C.choose([],s.cfg.base,s.cfg.goal);
+    const frames=s.records.reduce((a,r)=>a+r.measuredFrames,0), slow=s.records.reduce((a,r)=>a+r.slowFrames,0);
+    const proof=C.compareMatched(s.records,s.proposedCm,s.cfg.base,{goal:s.cfg.goal,raw:s.rawAll,unstable:frames>0&&slow/frames>.1});
+    const insufficient=validation.insufficient||tune.insufficient,chosen=!insufficient&&proof.accepted?s.proposedCm:s.cfg.base;
+    const statuses={same:'本轮未找到优于基准的候选',repeat:'重复不足 · 保留原设置，候选仅供参考',samples:'有效样本不足 · 保留原设置',input:'输入条件未确认 · 保留原设置',frames:'帧稳定性不足 · 建议重测',uncertain:'改进尚不稳定 · 保留原设置',supported:'配对复测支持的候选 · '+C.GOALS[s.cfg.goal].name};
+    const status=insufficient?'数据不足 · 保留原设置':statuses[proof.reason];
+    const refinement=s.records.filter(r=>r.stage==='refine'),domains={precision:C.choose(refinement,s.cfg.base,'precision').cm,tracking:C.choose(refinement,s.cfg.base,'tracking').cm};
+    const used=s.records.filter(r=>r.stage==='verify'&&Math.abs(r.cm-chosen)<.001),result={version:2,at:new Date().toISOString(),cfg:s.cfg,cm:chosen,proposedCm:s.proposedCm,gain:proof.improvement,proof,domains,status,insufficient,raw:s.rawAll,records:s.records,used,ranking:tune.ranking,seed:s.seed};
+    state.lastReport=result;state.session=null;leaveArena();showResults(result);saveHistory({at:result.at,version:2,cm:chosen,base:s.cfg.base,dpi:s.cfg.dpi,game:s.cfg.game,goal:s.cfg.goal,gain:result.gain,status,raw:s.rawAll,length:s.cfg.length,insufficient});
+  }
+  function showResults(r) {
+    const rows = r.used, cfg = r.cfg, clicks = rows.filter(e => taskById(e.task).group === '定位'), tracks = rows.filter(e => taskById(e.task).group === '跟枪'), shots = clicks.reduce((s, e) => s + e.shots, 0), hits = clicks.reduce((s, e) => s + e.hits, 0), trackTime = tracks.reduce((s, e) => s + e.elapsed, 0), onTime = tracks.reduce((s, e) => s + e.onTime, 0), avgAngle = trackTime ? tracks.reduce((s, e) => s + e.avgAngle * e.elapsed, 0) / trackTime : 0, over = clicks.reduce((s, e) => s + e.over, 0), under = clicks.reduce((s, e) => s + e.under, 0);
+    $('reportStatus').textContent = r.status; $('recommendedCm').textContent = r.cm.toFixed(2); const p = C.profiles[cfg.game]; $('recommendedGame').textContent = p.name + ' · ' + C.sensitivity(cfg.dpi, r.cm, p.yaw).toFixed(p.digits) + ' 游戏灵敏度' + (p.estimate ? '（估算）' : ''); $('evidenceText').textContent = r.insufficient ? '有效命中或跟踪数据不足，无法据此建议更改灵敏度。完成更多目标后再次测试。' : (cfg.length === 'quick' ? '快速模式仅是初步筛选。' : '收敛候选重复两轮，并与原设置配对复测三轮。') + (r.raw ? '本轮使用原始鼠标输入请求。' : '本轮未获得原始鼠标输入，系统指针处理可能影响手感，建议使用支持原始输入的浏览器复测。'); $('comparison').textContent=C.GOALS[cfg.goal].name+' · 候选相对基准指数变化 '+(r.gain>=0?'+':'')+r.gain.toFixed(1)+'%'+(r.proof.interval?' · 配对重采样区间 '+r.proof.interval.map(v=>v.toFixed(1)+'%').join(' 至 '):' · 复测重复不足以估计区间')+'（非命中率增幅）';$('domainAdvice').textContent='分项候选（未单独复测）：定位 '+r.domains.precision.toFixed(2)+' cm · 跟枪 '+r.domains.tracking.toFixed(2)+' cm。';
+    const speedText = [0, 1, 2].map(i => { const duration = tracks.reduce((s, e) => s + e.speedTime[i], 0), on = tracks.reduce((s, e) => s + e.speedOn[i], 0); return pct(duration ? on / duration : 0); }).join(' / ');
+    $('metrics').innerHTML = [{ name: '定位命中率', value: pct(shots ? hits / shots : 0), note: hits + ' 命中 / ' + shots + ' 发 · 独立复测' }, { name: '跟踪在靶率', value: pct(trackTime ? onTime / trackTime : 0), note: '慢 / 中 / 快：' + speedText }, { name: '平均跟踪角度误差', value: avgAngle.toFixed(2) + '°', note: '按时间积分统计，数值越低越贴近目标' }, { name: '首发未命中诊断', value: over + ' / ' + under, note: '过甩 / 欠甩次数 · 仅作修正方向参考' }].map(m => '<div class="metric"><span>' + m.name + '</span><strong>' + m.value + '</strong><small>' + m.note + '</small></div>').join('');
+    $('resultDpi').textContent = cfg.dpi + ' DPI · ' + cfg.fov + '° HFOV'; $('gameResults').innerHTML = Object.entries(C.profiles).filter(([id])=>id!=='aimlabs').map(([id, profile]) => { const value = C.sensitivity(cfg.dpi, r.cm, profile.yaw).toFixed(profile.digits); return '<div class="game-result"><span>' + profile.name + (profile.estimate ? ' · 估算' : '') + '</span><b>' + value + '</b><button class="copy-value" data-copy="' + value + '">复制</button><small>' + cfg.dpi + ' DPI · ' + r.cm.toFixed(2) + ' cm/360°' + (profile.estimate ? ' · yaw 0.022 待游戏内校验' : '') + '</small></div>'; }).join('');
+    const sorted = [...r.ranking].sort((a, b) => b.cm - a.cm),maxScore=Math.max(100,...r.ranking.map(v=>v.score)); $('scoreChart').innerHTML = sorted.map(v => '<div class="chart-col ' + (Math.abs(v.cm - r.proposedCm) < .001 ? 'best' : '') + '"><div style="height:' + Math.max(3,v.score/maxScore*80) + 'px"><b>' + v.score.toFixed(1) + '</b></div><small>' + v.cm.toFixed(1) + ' cm</small></div>').join('');
+    $('scoreTable').innerHTML = sorted.map(v => { const byTask = id => v.runs.filter(row => row.task === id), clickRate = id => { const rs = byTask(id), a = rs.reduce((s, row) => s + row.shots, 0), b = rs.reduce((s, row) => s + row.hits, 0); return pct(a ? b / a : 0); }, trackRate = id => { const rs = byTask(id), duration = rs.reduce((s, row) => s + row.elapsed, 0); return pct(duration ? rs.reduce((s, row) => s + row.onTime, 0) / duration : 0); }; return '<tr class="' + (Math.abs(v.cm - r.proposedCm) < .001 ? 'winner' : '') + '"><td>' + v.cm.toFixed(2) + ' cm</td><td>' + clickRate('flick') + '</td><td>' + clickRate('micro') + '</td><td>' + trackRate('smooth') + '</td><td>' + trackRate('strafe') + '</td><td>' + v.score.toFixed(1) + '（参考100）</td></tr>'; }).join('');
+    const slow = r.records.reduce((s, v) => s + v.slowFrames, 0), total = r.records.reduce((s, v) => s + v.measuredFrames, 0); if (total && slow / total > .1) $('evidenceText').textContent += '检测到较多长帧，建议关闭占用较高的程序后重测。'; showView('resultsView');
+  }
+  function showHistory() {
+    const list = history().reverse(); $('historyList').innerHTML = list.length ? list.map(v => '<div class="history-row"><div><strong>' + esc(Number(v.cm).toFixed(2)) + ' cm/360°</strong><p>' + esc(C.profiles[v.game]?.name || v.game) + ' · ' + esc(v.dpi) + ' DPI · ' + (v.length === 'standard' ? '标准' : '快速') + '</p></div><span>' + esc(v.status) + '<br>' + esc(new Date(v.at).toLocaleString('zh-CN')) + '</span></div>').join('') : '<p class="history-empty">完成一轮校准后，记录会出现在这里。' + (storageAvailable ? '' : '当前浏览器暂不允许本地存储。') + '</p>'; showView('historyView');
+  }
+  function demo() { state.session = null; state.demo = true; state.running = true; enterArena(); state.demo = true; state.running = true; $('overlay').classList.add('hidden'); $('adapt').classList.add('hidden'); $('speedLabel').classList.add('hidden'); $('demoExit').classList.remove('hidden'); $('phaseLabel').textContent = '训练场演示 · 不计成绩'; $('taskName').textContent = '固定准星 · 第一人称视角'; $('runLabel').textContent = '自动演示视角旋转与目标投影'; $('timer').textContent = 'DEMO'; $('liveValue').textContent = '3D'; $('liveLabel').textContent = '角度驱动'; $('inputMode').textContent = '未进行灵敏度测量'; $('instruction').textContent = '演示模式不生成测量结果。点击下方按钮开始正式校准。'; $('sessionProgress').textContent = '训练场预览'; $('sessionBar').style.width = '0%'; state.lastFrame = performance.now(); cancelAnimationFrame(state.raf); state.raf = requestAnimationFrame(frame); }
+  function abort() { state.session = null; leaveArena(); showView('setupView'); }
+  function exportData() { if (!state.lastReport) return; const blob = new Blob([JSON.stringify(state.lastReport, null, 2)], { type: 'application/json' }), url = URL.createObjectURL(blob), a = document.createElement('a'); a.href = url; a.download = 'sensitivity-report-' + new Date().toISOString().slice(0, 10) + '.json'; a.click(); setTimeout(() => URL.revokeObjectURL(url), 1000); }
+
+  document.addEventListener('pointerlockchange', () => { if (document.pointerLockElement === $('arenaCanvas')) onLockReady(); else if (state.session && state.running) pauseTask(); });
+  document.addEventListener('pointerlockerror', () => { if (state.session && !state.running) setOverlay('鼠标锁定未获准', '请点击按钮重新锁定鼠标。若浏览器阻止此操作，请使用电脑端 Chrome 或 Edge 打开本地文件。', '点击重试锁定 ↗'); });
+  document.addEventListener('mousemove', move); document.addEventListener('mousedown', e => { if (e.button === 0 && document.pointerLockElement === $('arenaCanvas')) { state.held = true; fire(); } }); document.addEventListener('mouseup', e => { if (e.button === 0) state.held = false; }); document.addEventListener('visibilitychange', () => { if (document.hidden && state.session && state.running) pauseTask('窗口已切换 · 测试暂停', '返回页面后继续，切出窗口的时间不计入测试。'); }); document.addEventListener('keydown', e => { if (e.key === 'Escape' && state.demo) { leaveArena(); showView('setupView'); } }); $('arenaCanvas').addEventListener('contextmenu', e => e.preventDefault());
+  $('game').addEventListener('change', () => { const dpi = Number($('dpi').value), previous = C.profiles[previousGame], cm = C.cm360(dpi, Number($('sens').value), previous.yaw), next = C.profiles[$('game').value]; $('sens').value = Number.isFinite(cm) && cm > 0 ? C.sensitivity(dpi, cm, next.yaw).toFixed(next.digits + 1) : next.sens; $('fov').value = next.fov; $('goal').value=['valorant','cs2'].includes($('game').value)?'precision':'balanced'; previousGame = $('game').value; updateBaseline(); }); for (const id of ['sens', 'dpi', 'fov', 'length', 'goal']) $(id).addEventListener('input', updateBaseline);
+  $('beginBtn').addEventListener('click', begin); $('resumeBtn').addEventListener('click', requestLock); $('abortBtn').addEventListener('click', abort); $('demoBtn').addEventListener('click', demo); $('demoExit').addEventListener('click', () => { leaveArena(); showView('setupView'); }); $('sourcesBtn').addEventListener('click', () => $('sourcesDialog').showModal()); $('closeSources').addEventListener('click', () => $('sourcesDialog').close()); $('sourcesDialog').addEventListener('click', e => { if (e.target === $('sourcesDialog') && (e.offsetX < 0 || e.offsetY < 0 || e.offsetX > e.target.clientWidth || e.offsetY > e.target.clientHeight)) $('sourcesDialog').close(); }); $('navFinder').addEventListener('click', () => showView('setupView')); $('navHistory').addEventListener('click', showHistory); $('brandHome').addEventListener('click', e => { e.preventDefault(); showView('setupView'); }); $('historyBack').addEventListener('click', () => showView('setupView')); $('resultBack').addEventListener('click', () => showView('setupView')); $('exportBtn').addEventListener('click', exportData); $('retestBtn').addEventListener('click', () => { const r = state.lastReport; if (!r) return; $('game').value = r.cfg.game; previousGame = r.cfg.game; $('dpi').value = r.cfg.dpi; $('goal').value=r.cfg.goal; $('fov').value = r.cfg.fov; $('sens').value = C.sensitivity(r.cfg.dpi, r.cm, C.profiles[r.cfg.game].yaw).toFixed(6); updateBaseline(); showView('setupView'); begin(); });
+  $('gameResults').addEventListener('click', async e => { const button = e.target.closest('[data-copy]'); if (!button) return; try { await navigator.clipboard.writeText(button.dataset.copy); button.textContent = '已复制'; setTimeout(() => button.textContent = '复制', 1200); } catch { button.textContent = '请手动选择数值'; } });
+  $('taskCards').innerHTML = C.TASKS.map((t, i) => '<article class="task-card"><span class="task-icon">' + ['⊹', '⠿', '∿', '⇆'][i] + '</span><div><h3>' + t.name + '</h3><div class="en">' + t.en + '</div><p>' + t.desc + '</p></div></article>').join('');
+  window.addEventListener('message', e => {
+    if (window.parent === window || e.source !== window.parent || e.data?.type !== 'aim-feel-host-visibility' || typeof e.data.visible !== 'boolean') return;
+    hostVisible = e.data.visible;
+    if (hostVisible) { requestAnimationFrame(() => { preview(); renderer.resize(); }); return; }
+    state.held = false;
+    if (state.demo) { leaveArena(); showView('setupView'); }
+    else if (state.session) pauseTask('校准已暂停', '返回校准页面后，点击继续即可从本小节的暂停位置恢复。');
+  });
+  updateHistoryCount(); updateBaseline(); preview();
+})();
+
+</script></body></html>

@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#f4f5f7">
-<meta name="description" content="准星手感 FPS 灵敏度转换器：支持 VALORANT 与 CS2 灵敏度换算，以及 16:9、4:3 等画面比例的屏幕距离匹配。">
-<title>准星手感 | FPS 灵敏度转换器</title>
+<meta name="theme-color" content="#181a1b">
+<meta name="description" content="准星手感：FPS 灵敏度换算、个人瞄准灵敏度校准与职业选手准星预设。">
+<title>准星手感 | 灵敏度换算、校准与准星中心</title>
 <style>
 :root{color-scheme:light;--ink:#202936;--muted:#75808e;--line:#e5e8ec;--blue:#526a83;--blue-deep:#3d536b;--gold:#ad8956;--surface:#fff;--wash:#f4f5f7;--soft:#f8f9fa;--good:#3c896d}
 *{box-sizing:border-box}body{margin:0;background:var(--wash);color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;font-size:15px;line-height:1.55}button,input,select{font:inherit}button{cursor:pointer}.wrap{max-width:1100px;margin:0 auto;padding:0 28px}
@@ -42,8 +42,14 @@ footer{background:#273544;color:#d4dbe2;padding:26px 0 22px;margin-top:0}.footer
 .home-cta:active{transform:translateY(0) scale(.985)}
 .home-points{display:flex;justify-content:center;flex-wrap:wrap;gap:9px 22px;margin-top:36px;color:#9aa4ae;font-size:10px}
 .home-points span{display:flex;align-items:center;gap:7px}.home-points span:before{content:"";width:4px;height:4px;border-radius:50%;background:#b2c1cd}
-.back-home{display:inline-flex;align-items:center;gap:7px;border:0;background:transparent;padding:0;margin:0 0 18px;color:#8794a1;font-size:11px;font-weight:600;transition:color .2s,transform .2s}
-.back-home:hover{color:var(--blue-deep);transform:translateX(-2px)}
+.back-home{position:relative;display:inline-flex;align-items:center;align-self:flex-start;gap:10px;min-width:175px;min-height:49px;max-width:100%;border:1px solid #627a68;border-radius:7px;background:#303d35;padding:12px 15px;margin:0 0 18px;color:#d0dfc9;font-size:13px;font-weight:600;text-align:left;transition:color .24s,background-color .24s,border-color .24s,box-shadow .24s,transform .24s cubic-bezier(.2,.8,.2,1)}
+.back-home::before{content:"";position:absolute;left:0;top:50%;width:3px;height:18px;border-radius:0 3px 3px 0;background:#b3c9bd;transform:translateY(-50%);transition:height .24s,background-color .24s}
+.back-home span{display:inline-block;color:#b3c9bd;transition:transform .24s cubic-bezier(.2,.8,.2,1)}
+.back-home:hover{color:#e3ebdf;background:#3a4c40;border-color:#8da793;box-shadow:0 5px 16px #0003;transform:translateY(-1px)}
+.back-home:hover span{transform:translateX(-3px)}
+.back-home:hover::before{height:24px}
+.back-home:focus-visible{outline:2px solid #b3c9bd;outline-offset:3px}
+.back-home:active{background:#29392e;box-shadow:none;transform:translateY(0) scale(.98)}
 button,select,input[type=range]{-webkit-tap-highlight-color:transparent}
 button{transition:color .22s,background-color .22s,border-color .22s,box-shadow .22s,transform .22s cubic-bezier(.2,.8,.2,1)}
 select,input[type=number]{transition:border-color .22s,box-shadow .22s,background-color .22s}
@@ -54,7 +60,7 @@ select.changed,input.changed{animation:controlFlash .38s ease-out}
 .copy:active,.swap:active{transform:scale(.94)}
 .motto-line{min-height:22px;transition:opacity .3s ease,transform .3s ease}
 .motto-line.fade{opacity:0;transform:translateY(5px)}
-@media(prefers-reduced-motion:reduce){.view-panel,.home-cta,.home-cta svg,.back-home,.motto-line,.mode-btn,button,select,input[type=number]{transition-duration:.01ms!important;animation-duration:.01ms!important;scroll-behavior:auto!important}}
+@media(prefers-reduced-motion:reduce){.view-panel,.home-cta,.home-cta svg,.back-home,.back-home span,.back-home::before,.motto-line,.mode-btn,button,select,input[type=number]{transition-duration:.01ms!important;animation-duration:.01ms!important;scroll-behavior:auto!important}}
 
 /* Animated custom dropdowns */
 .custom-select{position:relative;width:100%;z-index:2}.custom-select.open{z-index:40}
@@ -77,6 +83,48 @@ select.changed,input.changed{animation:controlFlash .38s ease-out}
 @media(max-width:620px){.select-trigger{font-size:12px;padding:0 10px}.ratio-row .select-trigger{font-size:11px;padding-left:8px}.dropdown-option{font-size:11px;padding:9px 8px}.home-hero{padding-top:55px}}
 @media(prefers-reduced-motion:reduce){.dropdown-list,.dropdown-option,.select-trigger,.select-chevron{transition-duration:.01ms!important;animation-duration:.01ms!important}}
 @media(max-width:620px){.wrap{padding:0 17px}header{height:66px}.contact{padding:6px 9px;font-size:10px}.brand{font-size:16px}.brand-mark{width:30px;height:30px}main{padding:41px 0 48px}.intro{margin-bottom:23px}.intro p{font-size:12px}.card{padding:19px 16px;border-radius:15px}.game-row{grid-template-columns:1fr 32px 1fr;gap:7px}.swap{width:31px;height:31px}.select-wrap:after{right:12px}select{font-size:12px;padding-left:10px;padding-right:28px}.ratio-row{gap:10px;padding:13px 11px}.ratio-row select{font-size:11px;padding-left:8px}.ratio-title span{max-width:47%;text-align:right}.mode-row{align-items:flex-start;flex-direction:column;gap:8px}.mode-switch{width:100%}.mode-btn{flex:1;padding:8px 5px}.entry-row{gap:10px}.input-shell input{font-size:17px;padding-left:11px}.result{padding:15px;min-height:90px}.result-val{font-size:26px}.meta{grid-template-columns:1fr;gap:9px}.footer-inner{padding:0 18px}.motto{font-size:11px;gap:7px 14px}}
+/* Full-viewport layout: center the main experience and keep the footer at the bottom */
+html,body{min-height:100%;min-height:100vh;min-height:100svh}
+body{display:flex;flex-direction:column}
+.wrap{width:100%;max-width:none;flex:1;display:flex;flex-direction:column;margin:0;padding:0 clamp(18px,4vw,64px)}
+header,main{width:100%;max-width:1600px;margin-left:auto;margin-right:auto}
+main{flex:1;display:flex;flex-direction:column;justify-content:center;padding:clamp(24px,4vh,48px) 0}
+.home-view{flex:1;min-height:0;padding:24px 20px;align-items:center;justify-content:center}
+.converter-view:not(.hidden){flex:1}
+footer{width:100%;margin-top:auto}
+.footer-inner{max-width:1600px}
+@media(max-width:620px){
+.wrap{padding:0 17px}
+main{padding:24px 0 28px}
+.home-view{min-height:calc(100svh - 160px);padding:24px 2px}
+.home-hero{width:100%;padding-left:20px;padding-right:20px}
+}.parameter-note{margin-top:9px;color:#788390;font-size:10px;line-height:1.65}.parameter-note summary{display:inline-flex;align-items:center;gap:6px;color:#586879;font-size:10px;font-weight:650;cursor:pointer;user-select:none}.parameter-note summary::marker{color:#ad8956}.parameter-note div{margin-top:7px}.parameter-note a{color:#526a83;text-decoration:underline;text-underline-offset:2px}.parameter-note a:hover{color:#3d536b}
+/* Converter palette: refined cool blue; embedded calibration keeps its own dark theme. */
+.converter-view{--ink:#223448;--muted:#728399;--line:#dce6ee;--blue:#5b7f9c;--blue-deep:#3a5f7b;--gold:#a98558;--surface:#fff;--wash:#f1f6fa;--soft:#f5f8fb}
+.converter-view .card{background:linear-gradient(150deg,#fff 0%,#fbfdff 100%);border-color:#dce6ee;box-shadow:0 20px 58px #3c5e7a12}
+.converter-view .ratio-row{background:linear-gradient(135deg,#f0f6fa,#f7fafc);border-color:#e1eaf0}
+.converter-view .result{background:linear-gradient(120deg,#eaf2f8,#f5f9fc);border-color:#dbe7ef}
+.converter-view .meta-card{background:linear-gradient(150deg,#fff,#fafdff);border-color:#e0e9ef}
+.home-actions{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:12px;margin-top:28px}.home-actions .home-cta{margin:0}
+.home-cta-secondary{background:linear-gradient(135deg,#fff,#f2f6f9);border-color:#dce5ec;color:#526a7d;box-shadow:0 5px 16px #829bb110}.home-cta-secondary:hover{background:linear-gradient(135deg,#f8fbfd,#eaf1f6);border-color:#c7d8e4;box-shadow:0 10px 22px #718da71e}
+.lab-view{flex:1;min-height:calc(100svh - 155px);padding:10px 0 22px}.lab-frame{display:block;width:100%;height:calc(100svh - 185px);min-height:720px;border:1px solid #28394b;border-radius:16px;background:#101722;box-shadow:0 20px 55px #26374c20}
+@media(max-width:620px){.home-actions{flex-direction:column;gap:10px}.home-actions .home-cta{width:min(100%,310px);min-height:49px}.lab-view{min-height:0;padding:4px 0 14px}.lab-frame{height:calc(100svh - 165px);min-height:680px;border-radius:13px}}
+.crosshair-frame{background:#0b0d10;border-color:#272b33}
+
+/* Site dark palette. */
+:root,.converter-view{color-scheme:dark;--ink:#deded8;--muted:#a4ada9;--line:#3d4643;--blue:#b3c9bd;--blue-deep:#c2d1c7;--gold:#bfb49d;--surface:#232729;--wash:#181a1b;--soft:#1e2223;--good:#adcdb7}
+header{border-color:#353d3a}.brand-mark{background:#34483f;color:#dee6de}.contact{background:#202426;border-color:#3a433f;color:#b0b8b1}.contact b{color:#c2d1c7}.contact .contact-icon{background:#303c36;color:#c4bba7}
+.home-hero{background:radial-gradient(ellipse at 50% 0%,#2a3330 0%,#222729 54%,#202426 100%);border-color:#3b4540;box-shadow:0 24px 70px #0005}.home-title{color:#e2e1da}.home-title em{color:#b3c9bd}.home-copy{color:#adb5af}.home-points{color:#a4ada7}.home-points span:before{background:#667a6d}
+.home-cta{background:linear-gradient(135deg,#3e574b,#344b40);color:#e1e9e1;border-color:#637c6d;box-shadow:0 7px 20px #0003}.home-cta:hover{background:linear-gradient(135deg,#4c685a,#405b4d);border-color:#8da793;box-shadow:0 11px 25px #0005}.home-cta-secondary{background:linear-gradient(135deg,#2a3330,#252d2a);color:#c5cfc6;border-color:#495950;box-shadow:0 5px 16px #0002}.home-cta-secondary:hover{background:linear-gradient(135deg,#36443c,#303c35);border-color:#819989;box-shadow:0 10px 22px #0004}
+.intro p{color:#adb5ae}.field-label{color:#b6beb6}.helper,.suffix{color:#a4ada7}
+.converter-view .card{background:linear-gradient(150deg,#262d2c,#222729);border-color:#3b4640;box-shadow:0 20px 58px #0004}.converter-view .ratio-row{background:linear-gradient(135deg,#1e2422,#232c27);border-color:#3c4840}.ratio-title strong{color:#d3d9cf}.ratio-title span{color:#abb5ac}.input-shell input,select{background:#1c2220;color:#dfe3da;border-color:#465449}.input-shell input:focus,select:focus{border-color:#9eb4a3;box-shadow:0 0 0 3px #9eb4a31e}
+.select-trigger{background:#1c2220;color:#d7dfd4;border-color:#465449}.select-trigger:hover{background:#2a372f;border-color:#7c9382}.select-trigger:focus-visible,.custom-select.open .select-trigger{border-color:#9eb4a3;box-shadow:0 0 0 3px #9eb4a31e}.select-chevron{color:#b1c1b2}.dropdown-list{background:#242d28;border-color:#506355;box-shadow:0 10px 26px #0006;scrollbar-color:#718576 #242d28;scrollbar-width:thin}.dropdown-option{color:#c3cec1}.dropdown-option:hover,.dropdown-option:focus-visible{background:#374c3e;color:#e4ebdf}.dropdown-option[aria-selected=true]{background:#354a3c;color:#d3e2cd}
+.swap,.copy{background:#2e3b33;border-color:#536858;color:#d0decb}.swap:hover,.copy:hover{background:#3a5041;border-color:#829b87}.copy.copied{color:#bfd9bf;border-color:#6a8d70}
+.converter-view .result{background:linear-gradient(120deg,#2d3b33,#27332c);border-color:#4a604e}.result-label{color:#bac9b7}.result-unit{color:#b7c5b3}.result-meta{color:#afbfab}.hint{background:#1e2821;border-color:#3d4d40;color:#b6c2b1}.hint svg{color:#c4bba7}
+.converter-view .meta-card{background:linear-gradient(150deg,#252d28,#212822);border-color:#3d4940}.meta-title{color:#d9dfd3}.meta-copy{color:#b0bca9}.parameter-note{color:#b0bca9}.parameter-note summary{color:#cad7bf}.parameter-note a{color:#b9cfb0}.parameter-note a:hover{color:#e0ebd5}
+.lab-frame{border-color:#3d4941;background:#181e1a;box-shadow:0 20px 55px #0005}.crosshair-frame{background:#181a1b;border-color:#3d4643}footer{background:#1b201d;border-top:1px solid #353f37;color:#c7d1c1}.footer-note{color:#a6b29f}.toast{background:#334737;color:#e2eadc;border:1px solid #667e67}
+@keyframes controlFlash{0%{background-color:#3c5342}100%{background-color:#1c2220}}
+
 </style>
 </head>
 <body>
@@ -87,8 +135,8 @@ select.changed,input.changed{animation:controlFlash .38s ease-out}
 <div class="home-hero">
 <h1 class="home-title">找到属于你的<br><em>准星节奏</em></h1>
 <p class="home-copy">在不同 FPS 游戏之间，带着熟悉的手感继续前进。<br>从灵敏度开始，找到你的瞄准节奏。</p>
-<button class="home-cta" id="startJourney">开始你的瞄准之旅<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button>
-<div class="home-points"><span>VALORANT × CS2</span><span>360° 角度换算</span><span>画幅比例校正</span></div>
+<div class="home-actions"><button class="home-cta" id="openConverter">开始灵敏度换算<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button><button class="home-cta home-cta-secondary" id="openLab">校准适合你的灵敏度<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="6"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg></button><button class="home-cta home-cta-secondary" id="openCrosshair">浏览准星中心<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="7"/><path d="M12 2v6m0 8v6M2 12h6m8 0h6"/></svg></button></div>
+<div class="home-points"><span>VALORANT · CS2 · 三角洲行动</span><span>灵敏度换算</span><span>个人手感校准</span><span>职业选手准星</span></div>
 </div>
 </section>
 <section class="converter-view view-panel hidden" id="converterView" aria-hidden="true">
@@ -114,13 +162,15 @@ select.changed,input.changed{animation:controlFlash .38s ease-out}
 <div class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg><span id="hintText">按游戏旋转系数与显示比例校正换算。画面比例按准星中心附近视角估算，DPI 不影响灵敏度比例。</span></div>
 </section>
 <section class="meta">
-<div class="meta-card"><div class="meta-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19V5m0 14h16M7 15l4-5 3 3 5-7"/></svg>换算依据</div><div class="meta-copy">按游戏视角旋转系数与画面比例自动校正，作为切换游戏时的灵敏度起点。</div></div>
+<div class="meta-card"><div class="meta-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19V5m0 14h16M7 15l4-5 3 3 5-7"/></svg>换算依据</div><div class="meta-copy">基础换算按游戏灵敏度系数计算；16:9 下采用 VALORANT = CS2 × 0.318（反向约 × 3.145）。画幅系数单独显示。</div><details class="parameter-note"><summary>参数来源与精度</summary><div>VALORANT / CS2 的基础比例采用本项目校准值 0.318；CS2 旋转系数按 0.022 作为基准，由此反推 VALORANT 系数。Delta Force 的 0.022 与 90° 参考 FOV 来自社区换算资料，属于估算值。画幅校正使用页面内置 FOV 参考值，实际游戏设置可能不同。<a href="https://sensconverter.vercel.app/games/delta-force" target="_blank" rel="noopener noreferrer">查看 Delta Force 参数资料 ↗</a></div></details></div>
 <div class="meta-card"><div class="meta-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>比例校正说明</div><div class="meta-copy" id="cmInfo">画面比例按准星中心附近的视角做固定参考校正。不同游戏的 FOV 与拉伸策略会影响实际手感，可在游戏内微调。</div></div>
 </section>
 </section>
+<section class="lab-view view-panel hidden" id="labView" aria-hidden="true"><button class="back-home" id="backHomeFromLab"><span aria-hidden="true">←</span> 返回首页</button><iframe class="lab-frame" id="labFrame" data-src="sensitivity-finder-independent.html" title="准星手感 · 灵敏度校准器" allow="fullscreen" allowfullscreen></iframe></section>
+<section class="lab-view view-panel hidden" id="crosshairView" aria-hidden="true"><button class="back-home" id="backHomeFromCrosshair"><span aria-hidden="true">←</span> 返回首页</button><iframe class="lab-frame crosshair-frame" id="crosshairFrame" data-src="crosshair-center.html" title="准星手感 · 准星中心" allow="clipboard-write"></iframe></section>
 </main>
 </div>
-<footer><div class="footer-inner"><div class="motto-line" id="mottoLine" aria-live="polite">努力，是你唯一的捷径</div><div class="footer-note">仅供灵敏度换算参考 · 找到适合自己的节奏</div></div></footer>
+<footer><div class="footer-inner"><div class="motto-line" id="mottoLine" aria-live="polite">努力，是你唯一的捷径</div><div class="footer-note">发现参数偏差？欢迎反馈游戏、画幅和实际手感 · QQ 2240939631</div></div></footer>
 <div class="toast" id="toast" role="status"></div>
 <script>
 (()=>{
@@ -129,14 +179,35 @@ function makeDropdown(id){const root=$(id),trigger=root.querySelector('.select-t
 const from=makeDropdown('fromGame'),to=makeDropdown('toGame'),fromRatio=makeDropdown('fromRatio'),toRatio=makeDropdown('toRatio'),sens=$('sens'),dpi=$('dpi'),result=$('result'),label=$('resultLabel'),meta=$('resultMeta'),hint=$('hintText'),cm=$('cmInfo'),copy=$('copy'),toast=$('toast');let toastTimer;
 const yaw={valorant:.022/.318,cs2:.022,deltaforce:.022},hfov169={valorant:103,cs2:106.26,deltaforce:90},ratioDefault='16/9';
 function gameName(g){return g==='cs2'?'CS2':g==='deltaforce'?'Delta Force 三角洲行动':'VALORANT'}function ratioName(s){return s.replace('/',' : ')}function ratioValue(s){const [w,h]=s.split('/').map(Number);return w/h}function hfov(game,ratio){const base=hfov169[game]*Math.PI/360,vertical=Math.atan(Math.tan(base)/(16/9));return 2*Math.atan(Math.tan(vertical)*ratioValue(ratio))}function ratioAngleFactor(game,ratio){return Math.tan(hfov(game,ratio)/2)/Math.tan(hfov(game,ratioDefault)/2)}
-function calc(){const s=Number(sens.value),d=Number(dpi.value),valid=Number.isFinite(s)&&s>=0&&sens.value!=='';const ratioCorrection=ratioAngleFactor(to.value,toRatio.value)/ratioAngleFactor(from.value,fromRatio.value),out=valid?s*(yaw[from.value]/yaw[to.value])*ratioCorrection:NaN;result.textContent=Number.isFinite(out)?(out===0?'0':Number(out.toPrecision(6)).toString()):'—';label.textContent=gameName(to.value)+' 对应灵敏度';const sourceCm=s>0&&d>0?360/(s*yaw[from.value]*d)*2.54:NaN,targetCm=Number.isFinite(out)&&out>0&&d>0?360/(out*yaw[to.value]*d)*2.54:NaN;meta.textContent=Number.isFinite(sourceCm)?'源 '+sourceCm.toFixed(1)+' cm/360°  →  目标 '+targetCm.toFixed(1)+' cm/360° · 画幅校正 ×'+ratioCorrection.toFixed(3):'';hint.textContent='按游戏旋转系数与显示比例校正换算。比例校正以准星中心附近的视角为参考，不同游戏 FOV 与拉伸策略可能带来手感差异。';cm.textContent='当前 '+ratioName(fromRatio.value)+' '+(fromRatio.value==='4/3'?'拉伸':'画面')+' → '+ratioName(toRatio.value)+' '+(toRatio.value==='4/3'?'拉伸':'画面')+'。画面比例自动按准星中心附近的视角做参考校正；实际效果会受游戏 FOV 与拉伸策略影响。';copy.disabled=!Number.isFinite(out);copy.style.opacity=copy.disabled?'.45':'1'}
+function calc(){const s=Number(sens.value),d=Number(dpi.value),valid=Number.isFinite(s)&&s>=0&&sens.value!=='';const baseFactor=yaw[from.value]/yaw[to.value],ratioCorrection=ratioAngleFactor(to.value,toRatio.value)/ratioAngleFactor(from.value,fromRatio.value),out=valid?s*baseFactor*ratioCorrection:NaN;result.textContent=Number.isFinite(out)?(out===0?'0':Number(out.toPrecision(6)).toString()):'—';label.textContent=gameName(to.value)+' 对应灵敏度';const sourceCm=s>0&&d>0?360/(s*yaw[from.value]*d)*2.54:NaN,targetCm=Number.isFinite(out)&&out>0&&d>0?360/(out*yaw[to.value]*d)*2.54:NaN;meta.textContent=Number.isFinite(sourceCm)?'基础换算 ×'+Number(baseFactor.toPrecision(4))+' · 画幅校正 ×'+ratioCorrection.toFixed(3)+' · 源 '+sourceCm.toFixed(1)+' → 目标 '+targetCm.toFixed(1)+' cm/360°':'';hint.textContent='基础换算匹配角度旋转速度；画幅校正按准星中心附近视角估算。DPI 不影响基础灵敏度比例，实际手感可能仍需微调。';cm.textContent='当前 '+ratioName(fromRatio.value)+' '+(fromRatio.value==='4/3'?'拉伸':'画面')+' → '+ratioName(toRatio.value)+' '+(toRatio.value==='4/3'?'拉伸':'画面')+'。画面比例自动按准星中心附近的视角做参考校正；实际效果会受游戏 FOV 与拉伸策略影响。';copy.disabled=!Number.isFinite(out);copy.style.opacity=copy.disabled?'.45':'1'}
 function animateChange(el){el.root.classList.remove('changed');void el.offsetWidth;el.root.classList.add('changed');window.setTimeout(()=>el.root.classList.remove('changed'),400)}
 from.addEventListener('change',()=>{animateChange(from);calc()});to.addEventListener('change',()=>{animateChange(to);calc()});for(const el of [fromRatio,toRatio])el.addEventListener('change',()=>{animateChange(el);calc()});sens.addEventListener('input',calc);dpi.addEventListener('input',calc);$('swap').addEventListener('click',()=>{const g=from.value,r=fromRatio.value;from.value=to.value;to.value=g;fromRatio.value=toRatio.value;toRatio.value=r;[from,to,fromRatio,toRatio].forEach(animateChange);calc()});
 copy.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(result.textContent);copy.textContent='已复制';copy.classList.add('copied');setTimeout(()=>{copy.textContent='复制结果';copy.classList.remove('copied')},1300)}catch{toast.textContent='复制失败，请手动选择结果';toast.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>toast.classList.remove('show'),1800)}});
-const home=$('homeView'),converter=$('converterView');let activeView='home',viewLock=false;function navigateView(next){if(viewLock||next===activeView)return;viewLock=true;const current=activeView==='home'?home:converter,dest=next==='home'?home:converter;current.classList.remove('is-visible');current.classList.add('is-exiting');window.setTimeout(()=>{current.classList.add('hidden');current.classList.remove('is-exiting');current.setAttribute('aria-hidden','true');dest.classList.remove('hidden');dest.classList.add('is-entering');dest.setAttribute('aria-hidden','false');requestAnimationFrame(()=>requestAnimationFrame(()=>{dest.classList.remove('is-entering');dest.classList.add('is-visible')}));activeView=next;window.scrollTo({top:0,behavior:'smooth'});window.setTimeout(()=>{viewLock=false},430)},230)}$('startJourney').addEventListener('click',()=>navigateView('converter'));$('backHome').addEventListener('click',()=>navigateView('home'));
-const mottos=['努力，是你唯一的捷径','准星所向，皆是练习的回响','每一次压枪，都离稳定更近一步','稳住准星，也稳住自己的节奏'];let mottoIndex=0;window.setInterval(()=>{const line=$('mottoLine');line.classList.add('fade');window.setTimeout(()=>{mottoIndex=(mottoIndex+1)%mottos.length;line.textContent=mottos[mottoIndex];line.classList.remove('fade')},300)},3000);
+const home=$('homeView'),converter=$('converterView'),lab=$('labView'),labFrame=$('labFrame'),crosshair=$('crosshairView'),crosshairFrame=$('crosshairFrame'),views={home,converter,lab,crosshair};let activeView='home',viewLock=false;
+function notifyLab(visible){if(labFrame.hasAttribute('src'))labFrame.contentWindow.postMessage({type:'aim-feel-host-visibility',visible},'*')}
+labFrame.addEventListener('load',()=>notifyLab(activeView==='lab'));
+function navigateView(next){
+  if(viewLock||next===activeView)return;
+  viewLock=true;
+  if(activeView==='lab')notifyLab(false);
+  const current=views[activeView],dest=views[next];
+  current.classList.remove('is-visible');current.classList.add('is-exiting');
+  window.setTimeout(()=>{
+    current.classList.add('hidden');current.classList.remove('is-exiting');current.setAttribute('aria-hidden','true');
+    dest.classList.remove('hidden');dest.classList.add('is-entering');dest.setAttribute('aria-hidden','false');
+    activeView=next;
+    if(next==='lab'&&!labFrame.hasAttribute('src'))labFrame.src=labFrame.dataset.src;
+    if(next==='crosshair'&&!crosshairFrame.hasAttribute('src'))crosshairFrame.src=crosshairFrame.dataset.src;
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{
+      dest.classList.remove('is-entering');dest.classList.add('is-visible');
+      if(next==='lab')notifyLab(true);
+    }));
+    window.scrollTo({top:0,behavior:'smooth'});window.setTimeout(()=>{viewLock=false},430);
+  },230);
+}
+$('openConverter').addEventListener('click',()=>navigateView('converter'));$('openLab').addEventListener('click',()=>navigateView('lab'));$('backHome').addEventListener('click',()=>navigateView('home'));$('backHomeFromLab').addEventListener('click',()=>navigateView('home'));$('openCrosshair').addEventListener('click',()=>navigateView('crosshair'));$('backHomeFromCrosshair').addEventListener('click',()=>navigateView('home'));
+const mottos=['努力，是你唯一的捷径','准星所向，皆是练习的回响','每一次压枪，都离稳定更近一步','稳住准星，也稳住自己的节奏','每一次复盘，都让下一发更有把握','把失误变成经验，把经验练成肌肉记忆','瞄准不是天赋，是一次次微调后的从容','手感会波动，练习让你始终在线','慢一点校准，快一步制胜'];let mottoIndex=0;window.setInterval(()=>{const line=$('mottoLine');line.classList.add('fade');window.setTimeout(()=>{mottoIndex=(mottoIndex+1)%mottos.length;line.textContent=mottos[mottoIndex];line.classList.remove('fade')},300)},3000);
 calc();
 })();
 </script>
 </body></html>
-
